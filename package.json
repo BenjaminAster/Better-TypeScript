@@ -1,0 +1,19 @@
+{
+	"name": "better-ts",
+	"version": "0.0.1",
+	"description": "Various TypeScript type definitions to make working with TypeScript more convenient",
+	"main": "./index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/BenjaminAster/Better-TypeScript.git"
+	},
+	"devDependencies": {
+		"new-javascript": "^0.2.0"
+	},
+	"author": "Benjamin Aster",
+	"license": "WTFPL",
+	"bugs": {
+		"url": "https://github.com/BenjaminAster/Better-TypeScript/issues"
+	},
+	"homepage": "https://github.com/BenjaminAster/Better-TypeScript#readme"
+}
