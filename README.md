@@ -7,7 +7,7 @@ This project goes along with [TypeScript types for new JavaScript](https://githu
 
 ---
 
-NPM: [better-ts](https://www.npmjs.com/package/better-ts)
+NPM: [better-typescript](https://www.npmjs.com/package/better-typescript)
 
 GitHub: [BenjaminAster/Better-TypeScript](https://github.com/BenjaminAster/Better-TypeScript)
 
@@ -15,24 +15,24 @@ GitHub: [BenjaminAster/Better-TypeScript](https://github.com/BenjaminAster/Bette
 
 Install using npm:
 ```shell
-npm i -D better-ts@latest
+npm i -D better-typescript@latest
 ```
 Reference the type definitions directly in your TypeScript/JavaScript files...
 ```javascript
-/// <reference types="better-ts" />
+/// <reference types="better-typescript" />
 ```
 ...or include them in your `tsconfig.json` or `jsconfig.json`:
 ```jsonc
 {
 	"compilerOptions": {
-		"types": ["better-ts"],
+		"types": ["better-typescript"],
 	},
 }
 ```
-Inside of a [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers), use `better-ts/worker` as the path:
+Inside of a [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers), use `better-typescript/worker` as the path:
 ```javascript
 /// <reference no-default-lib="true" />
-/// <reference types="better-ts/worker" />
+/// <reference types="better-typescript/worker" />
 ```
 
 ## Stuff in this repository
@@ -52,11 +52,11 @@ Just to be clear: This parser is _not_ written in TypeScript, it's written solel
 
 ### Service workers
 
-Working with service workers with type checking enabled is an awful experience by default as in TypeScript, there is no `ServiceWorker` lib, only a `WebWorker` one. Stuff like `self.registration`, `self.clients` or the `fetch` event aren't available by default because from TypeScript's perspecitve, `self` alywas has the type `WorkerGlobalScope` in workers, not `ServiceWorkerGlobalScope`. The way you could previously get around this is by declaring a variable `const _self = self as unknown as ServiceWorkerGlobalScope;` and then working with this `_self` instead of `self` as the global object. This is very ugly and hacky, so Better TypeScript simply provides all service worker related stuff out of the box to any web worker with the `better-ts/worker` types.
+Working with service workers with type checking enabled is an awful experience by default as in TypeScript, there is no `ServiceWorker` lib, only a `WebWorker` one. Stuff like `self.registration`, `self.clients` or the `fetch` event aren't available by default because from TypeScript's perspecitve, `self` alywas has the type `WorkerGlobalScope` in workers, not `ServiceWorkerGlobalScope`. The way you could previously get around this is by declaring a variable `const _self = self as unknown as ServiceWorkerGlobalScope;` and then working with this `_self` instead of `self` as the global object. This is very ugly and hacky, so Better TypeScript simply provides all service worker related stuff out of the box to any web worker with the `better-typescript/worker` types.
 
 ```typescript
 /// <reference no-default-lib="true" />
-/// <reference types="better-ts/worker" />
+/// <reference types="better-typescript/worker" />
 
 self.addEventListener("fetch", (event) => {
 	// `event` is of type `FetchEvent`
