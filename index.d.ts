@@ -11,3 +11,4 @@
 /// <reference path="./types/non-standard-stuff.d.ts" />
 /// <reference path="./types/offscreen-canvas.d.ts" />
 /// <reference path="./types/query-selector.d.ts" />
+/// <reference path="./types/tuple.d.ts" />

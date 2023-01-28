@@ -1,4 +1,5 @@
 
+// This has been included in TypeScript version 5.0 by default and will be removed once it is out of beta (March 14)
 
 interface MathMLElementTagNameMap {
 	"math": MathMLElement,
@@ -40,7 +41,7 @@ interface MathMLElementTagNameMap {
 	"maction": MathMLElement,
 }
 
-interface Document extends Node, DocumentAndElementEventHandlers, DocumentOrShadowRoot, FontFaceSource, GlobalEventHandlers, NonElementParentNode, ParentNode, XPathEvaluatorBase {
+interface Document extends Node, DocumentOrShadowRoot, FontFaceSource, GlobalEventHandlers, NonElementParentNode, ParentNode, XPathEvaluatorBase {
 	createElementNS<K extends keyof MathMLElementTagNameMap>(namespaceURI: "http://www.w3.org/1998/Math/MathML", qualifiedName: K): MathMLElementTagNameMap[K];
 	createElementNS(namespaceURI: "http://www.w3.org/1998/Math/MathML", qualifiedName: string): MathMLElement;
 	getElementsByTagNameNS<K extends keyof MathMLElementTagNameMap>(namespaceURI: "http://www.w3.org/1998/Math/MathML", localName: K): HTMLCollectionOf<MathMLElementTagNameMap[K]>;

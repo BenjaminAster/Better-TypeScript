@@ -13,8 +13,48 @@
 // / <reference lib="WebWorker" />
 // / <reference lib="WebWorker.Iterable" />
 
-// / <reference path="./index.d.ts" />
+/// <reference path="./index.d.ts" />
 // / <reference path="./worker.d.ts" />
+
+// onfetch
+
+
+// self.addEventListener("fetch", (event) => {
+
+// });
+
+const a: Tuple<number, 3> = [3, 4, 5];
+
+const element = document.querySelector("alskdfj a");
+element.querySelectorAll(":scope > li:nth-of-type(odd)")
+
+
+//////////////
+
+// interface Element {
+// 	// matches<K extends this extends HTMLAnchorElement ? HTMLAnchorElement : never>(selectors: "a"): selectors is "a";
+// 	// matches(selectors: "a"): this extends HTMLAnchorElement ? this : false;
+// 	// matches(selectors: "a"): typeof this extends HTMLAnchorElement ? true : false;
+// 	// matches(selectors: "a"): this extends infer HTMLAnchorElement ? true : false;
+// 	// matches<K extends this extends HTMLAnchorElement ? HTMLAnchorElement : never>(selectors: "a"): selectors is "a";
+// }
+
+
+
+// OffscreenCanvas
+
+// const element = document.querySelector("b");
+// // const element = document.querySelector("a");
+
+// if (element instanceof HTMLAnchorElement) {
+// 	element.href
+// } else if (element instanceof HTMLInputElement) {
+// 	element.value
+// }
+
+// if (element.matches("a")) {
+// 	element.href;
+// }
 
 // // const _self = self as unknown as ServiceWorkerGlobalScope;
 
@@ -30,7 +70,7 @@
 // const anchorClone = anchorTemplate.cloneNode(true);
 
 // importScripts("s")
-document
+// document
 
 // const fragment = document.querySelector<HTMLTemplateElement>("template#foo-template").content;
 

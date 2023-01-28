@@ -14,14 +14,19 @@ GitHub: [BenjaminAster/Better-TypeScript](https://github.com/BenjaminAster/Bette
 ---
 
 Install using npm:
+
 ```shell
 npm i -D better-typescript@latest
 ```
+
 Reference the type definitions directly in your TypeScript/JavaScript files...
+
 ```javascript
 /// <reference types="better-typescript" />
 ```
+
 ...or include them in your `tsconfig.json` or `jsconfig.json`:
+
 ```jsonc
 {
 	"compilerOptions": {
@@ -29,10 +34,31 @@ Reference the type definitions directly in your TypeScript/JavaScript files...
 	},
 }
 ```
-Inside of a [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers), use `better-typescript/worker` as the path:
+
+For [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) (including [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)), use `better-typescript/worker` as the path. If you use a `tsconfig.json` or `jsconfig.json` configuration file, you have to exclude the worker files there with the `"exclude"` option so that the DOM lib doesn't get included by default. If your worker is a JavaScript and not TypeScript file, you then have to manually re-enable type checking for the file via `// @ts-check`. Also don't forget to exclude the DOM lib with `no-default-lib="true"`. The start of your worker file should look like this:
+
 ```javascript
+// @ts-check
 /// <reference no-default-lib="true" />
 /// <reference types="better-typescript/worker" />
+```
+
+For [worklets](https://developer.mozilla.org/en-US/docs/Web/API/Worklet), use `better-typescript/worklet/<WORKLET_NAME>` as the path:
+ - `better-typescript/worklet/audio` for [audio worklets](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet)
+ - `better-typescript/worklet/paint` for [paint worklets](https://developer.mozilla.org/en-US/docs/Web/API/PaintWorklet)
+ - `better-typescript/worklet/layout` for [layout worklets](https://github.com/w3c/css-houdini-drafts/blob/main/css-layout-api/EXPLAINER.md)
+ - `better-typescript/worklet/animation` for [animation worklets](https://github.com/w3c/css-houdini-drafts/blob/main/css-animation-worklet-1/README.md)
+```javascript
+/// <reference types="better-typescript/worklet/audio" />
+```
+```javascript
+/// <reference types="better-typescript/worklet/paint" />
+```
+```javascript
+/// <reference types="better-typescript/worklet/layout" />
+```
+```javascript
+/// <reference types="better-typescript/worklet/animation" />
 ```
 
 ## Stuff in this repository
@@ -43,12 +69,13 @@ A querySelector parser that parses the CSS selector and automatically returns th
 
 ```typescript
 document.querySelector("a#foo.bar") // HTMLAnchorElement
-element.querySelector("form.info > input[type=radio][name=test]:nth-of-type(even)") // HTMLInputElement
+document.querySelector("form.info input[type=radio][name=test]:nth-of-type(even)") // HTMLInputElement
 document.querySelector(".math-output mrow ~ munderover[displaystyle=false]") // MathMLElement
-document.querySelector("svg#logo > filter:first-of-child feTurbulence:not([type=fractalNoise])") // SVGFETurbulenceElement
+element.querySelectorAll(":scope > li:nth-of-type(odd)") // NodeListOf<HTMLLIElement>
+document.querySelector("svg#logo > filter:first-of-type feTurbulence:not([type=fractalNoise])") // SVGFETurbulenceElement
 ```
 
-Just to be clear: This parser is _not_ written in TypeScript, it's written solely in _TypeScript type definitions_ (files ending in `.d.ts`). This works similar to [HypeScript](https://github.com/ronami/HypeScript).
+Just to be clear: This parser is _not_ written in TypeScript, it's written solely in _TypeScript type definitions_ (files ending in `.d.ts`). This works similarly to [HypeScript](https://github.com/ronami/HypeScript).
 
 ### Service workers
 
@@ -63,6 +90,18 @@ self.addEventListener("fetch", (event) => {
 })
 ```
 
+### Tuple
+
+This adds the `Tuple` type to create fixed length arrays:
+
+```typescript
+// 💩 previos method:
+const color: [number, number, number, number] = [255, 0, 0, 255];
+
+// 😎 with Better Typescript:
+const color: Tuple<number, 4> = [255, 0, 0, 255];
+```
+
 ### Accept not just strings
 
 Many JavaScript functions also accept numbers which then get automatically converted into a string. TypeScript often _just_ accepts strings, so Better TypeScript adds the ability to call a function with numbers instead of strings.
@@ -71,7 +110,7 @@ Many JavaScript functions also accept numbers which then get automatically conve
 window.addEventListener("pointermove", (event) => {
 	document.documentElement.style.setProperty("--mouse-x", event.clientX); // would be an error without Better TypeScript
 	document.documentElement.style.setProperty("--mouse-y", event.clientY);
-)};
+});
 ```
 
 ```typescript
@@ -103,6 +142,9 @@ for (let i = 0; i < 10; i++) {
 
 ### MathML
 
+> **Note**
+> This has been included in TypeScript version 5.0 by default and will be removed once it is out of beta (March 14)
+
 This adds support for [MathML](https://developer.mozilla.org/en-US/docs/Web/MathML) element names as well as the MathML namespace for the `document.createElementNS()` and `document.getElementsByTagNameNS` functions.
 
 ```typescript
@@ -129,14 +171,13 @@ canvas.getContext("2d", { alpha: false }); // now correctly returns type `Canvas
 
 ### Non-standard stuff
 
-This includes various non-standard features that are not part of any specification, e.g. Chromium's `chrome`, Brave's `navigator.brave.isBrave()` or Firefox' `CSSMozDocumentRule`. This can also be used for spoofing-resistant browser detection.
+This includes various non-standard features that are not part of any specification, e.g. Brave's [`navigator.brave.isBrave()`](https://github.com/brave/brave-browser/issues/8216#issuecomment-590184398), Firefox' `CSSMozDocumentRule` or Chromium & WebKit's [`scrollIntoViewIfNeeded()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded) function. This can also be used for spoofing-resistant browser detection.
 
 ```typescript
 const isBrave = await navigator.brave?.isBrave?.();
 ```
 
 ```typescript
-// Chromium & WebKit's non-standard scrollIntoViewIfNeeded() function
 if (Element.prototype.scrollIntoViewIfNeeded) element.scrollIntoViewIfNeeded(true);
 else element.scrollIntoView({ block: "center" });
 ```

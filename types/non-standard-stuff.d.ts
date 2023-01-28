@@ -34,8 +34,12 @@ declare var chrome: {
 
 // Brave:
 
-declare class Brave {
-	isBrave(): Promise<boolean>;
+interface Brave {
+	isBrave(): Promise<boolean>;}
+
+declare var Brave: {
+	prototype: Brave;
+	new(): never;
 }
 
 interface Navigator {
@@ -44,7 +48,12 @@ interface Navigator {
 
 // Firefox:
 
-declare class CSSMozDocumentRule {}
+interface CSSMozDocumentRule {}
+
+declare var CSSMozDocumentRule: {
+	prototype: CSSMozDocumentRule;
+	new(): never;
+}
 
 // Chromium & WebKit:
 
