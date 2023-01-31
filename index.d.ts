@@ -7,6 +7,7 @@
 
 /// <reference path="./types/accept-not-just-strings.d.ts" />
 /// <reference path="./types/clone-node.d.ts" />
+/// <reference path="./types/matches.d.ts" />
 /// <reference path="./types/mathml.d.ts" />
 /// <reference path="./types/non-standard-stuff.d.ts" />
 /// <reference path="./types/offscreen-canvas.d.ts" />

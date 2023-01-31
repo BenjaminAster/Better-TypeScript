@@ -25,20 +25,24 @@
 
 const a: Tuple<number, 3> = [3, 4, 5];
 
-const element = document.querySelector("alskdfj a");
-element.querySelectorAll(":scope > li:nth-of-type(odd)")
+const element1 = document.querySelector("alskdfj a");
+element1.querySelectorAll(":scope > li:nth-of-type(odd)")
 
+
+
+const element = document.querySelector(".foo");
+
+if (element.matches("img")) {
+	element.src = "https://bigrat.monster/media/bigrat.png";
+} else if (element.matches("dialog[open]")) {
+	element.showModal();
+} else if (element.matches("body > a#main-link[href]")) {
+	element.href = "https://youtube.be/dQw4w9WgXcQ";
+} else if (element.matches<HTMLTextAreaElement>(".inputfield")) {
+	element.value = "Hello world!";
+}
 
 //////////////
-
-// interface Element {
-// 	// matches<K extends this extends HTMLAnchorElement ? HTMLAnchorElement : never>(selectors: "a"): selectors is "a";
-// 	// matches(selectors: "a"): this extends HTMLAnchorElement ? this : false;
-// 	// matches(selectors: "a"): typeof this extends HTMLAnchorElement ? true : false;
-// 	// matches(selectors: "a"): this extends infer HTMLAnchorElement ? true : false;
-// 	// matches<K extends this extends HTMLAnchorElement ? HTMLAnchorElement : never>(selectors: "a"): selectors is "a";
-// }
-
 
 
 // OffscreenCanvas

@@ -63,7 +63,7 @@ For [worklets](https://developer.mozilla.org/en-US/docs/Web/API/Worklet), use `b
 
 ## Stuff in this repository
 
-### querySelector element parser
+### `.querySelector()` element parser
 
 A querySelector parser that parses the CSS selector and automatically returns the interface for the respective element:
 
@@ -76,6 +76,28 @@ document.querySelector("svg#logo > filter:first-of-type feTurbulence:not([type=f
 ```
 
 Just to be clear: This parser is _not_ written in TypeScript, it's written solely in _TypeScript type definitions_ (files ending in `.d.ts`). This works similarly to [HypeScript](https://github.com/ronami/HypeScript).
+
+### `.matches()`
+
+You can now use `element.matches(selector)` and Better TypeScript will automatically detect the element and provide you with its type definitions when using it in an if-statement:
+
+```typescript
+const element = document.querySelector(".foo");
+
+if (element.matches("img")) {
+	// `element` has type `HTMLImageElement` in this scope
+	element.src = "https://bigrat.monster/media/bigrat.png";
+} else if (element.matches("dialog[open]")) {
+	// `element` has type `HTMLDialogElement` in this scope
+	element.showModal();
+} else if (element.matches("body > a#main-link[href]")) {
+	// `element` has type `HTMLAnchorElement` in this scope
+	element.href = "https://youtube.be/dQw4w9WgXcQ";
+} else if (element.matches<HTMLTextAreaElement>(".inputfield")) {
+	// `element` has type `HTMLTextAreaElement` in this scope
+	element.value = "Hello world!";
+}
+```
 
 ### Service workers
 
@@ -119,7 +141,7 @@ searchParams.set("count", ++count); // would be an error without Better TypeScri
 history.replaceState(null, "", "?" + searchParams.toString());
 ```
 
-### cloneNode
+### `.cloneNode()`
 
 When calling `.cloneNode()` on any element or fragment, TypeScript just returns the `Node` type by default which is not very useful. With Better TypeScript, `.cloneNode()` returns the type of the element that it is called on.
 
