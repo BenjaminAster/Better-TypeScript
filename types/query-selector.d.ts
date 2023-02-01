@@ -6,46 +6,62 @@ declare namespace BetterTypeScript {
 		Input extends `${string} ${infer AfterFirstSpace}` ? BetterTypeScript.GetStringAfterLastSpace<AfterFirstSpace> : Input
 	);
 
-	type GetElementNameFromSelector<Input extends string> = (
-		BetterTypeScript.GetStringAfterLastSpace<Input> extends infer AfterLastSpace ? (
+	type SelectorContainsSVGOrMathMLElement<Input extends string, CurrentElementNamespaceType extends Element = HTMLElement> = (
+		Input extends `${infer CurrentSelectorFragment} ${infer AfterFirstSpace}` ? (
+			BetterTypeScript.GetElementTypeFromSimpleSelector<CurrentSelectorFragment> extends infer ElementType ? (
+				ElementType extends SVGElement
+				? SelectorContainsSVGOrMathMLElement<AfterFirstSpace, SVGElement>
+				: ElementType extends MathMLElement
+				? SelectorContainsSVGOrMathMLElement<AfterFirstSpace, MathMLElement>
+				: SelectorContainsSVGOrMathMLElement<AfterFirstSpace, CurrentElementNamespaceType>
+			) : never
+		) : CurrentElementNamespaceType
+	);
+
+	type GetElementTypeFromSimpleSelector<Input extends string> = (
+		(
+			Input extends `${infer BeforeFirstHash}#${string}`
+			? BeforeFirstHash
+			: Input
+		) extends infer Selector ? (
 			(
-				AfterLastSpace extends `${infer BeforeFirstHash}#${string}`
-				? BeforeFirstHash
-				: AfterLastSpace
+				Selector extends `${infer BeforeFirstPeriod}.${string}`
+				? BeforeFirstPeriod
+				: Selector
 			) extends infer Selector ? (
 				(
-					Selector extends `${infer BeforeFirstPeriod}.${string}`
-					? BeforeFirstPeriod
+					Selector extends `${infer BeforeFirstBracket}[${string}`
+					? BeforeFirstBracket
 					: Selector
 				) extends infer Selector ? (
 					(
-						Selector extends `${infer BeforeFirstBracket}[${string}`
-						? BeforeFirstBracket
+						Selector extends `${infer BeforeFirstColon}:${string}`
+						? BeforeFirstColon
 						: Selector
-					) extends infer Selector ? (
-						(
-							Selector extends `${infer BeforeFirstColon}:${string}`
-							? BeforeFirstColon
-							: Selector
-						) extends infer ElementName ? (
-							ElementName extends keyof HTMLElementTagNameMap
-							? HTMLElementTagNameMap[ElementName]
-							: ElementName extends keyof SVGElementTagNameMap
-							? SVGElementTagNameMap[ElementName]
-							: ElementName extends keyof MathMLElementTagNameMap
-							? MathMLElementTagNameMap[ElementName]
-							: HTMLElement
-						) : never
+					) extends infer ElementName ? (
+						ElementName extends keyof HTMLElementTagNameMap
+						? HTMLElementTagNameMap[ElementName]
+						: ElementName extends keyof SVGElementTagNameMap
+						? SVGElementTagNameMap[ElementName]
+						: ElementName extends keyof MathMLElementTagNameMap
+						? MathMLElementTagNameMap[ElementName]
+						: Element
 					) : never
 				) : never
+			) : never
+		) : never
+	);
+
+	type GetElementTypeFromSelector<Input extends string> = (
+		BetterTypeScript.GetStringAfterLastSpace<Input> extends infer SimpleSelector extends string ? (
+			BetterTypeScript.GetElementTypeFromSimpleSelector<SimpleSelector> extends infer ElementType ? (
+				Element extends ElementType ? SelectorContainsSVGOrMathMLElement<Input> : ElementType
 			) : never
 		) : never
 	);
 }
 
 interface ParentNode extends Node {
-	querySelector<K extends string>(selectors: K): BetterTypeScript.GetElementNameFromSelector<K>;
-	querySelectorAll<K extends string>(selectors: K): NodeListOf<BetterTypeScript.GetElementNameFromSelector<K>>;
+	querySelector<K extends string>(selectors: K): BetterTypeScript.GetElementTypeFromSelector<K>;
+	querySelectorAll<K extends string>(selectors: K): NodeListOf<BetterTypeScript.GetElementTypeFromSelector<K>>;
 }
-
-// TODO: .querySelector("something ANY_SVG_OR_MATHML_ELEMENT_TAG_NAME something") returns SVGElement/MathMLElement

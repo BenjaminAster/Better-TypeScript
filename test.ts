@@ -45,6 +45,51 @@ if (element.matches("img")) {
 //////////////
 
 
+
+const test20 = document.querySelector("q.c[a]:p.c[a]");
+const test21 = document.querySelector("q[a]#i#i:p.c");
+const test22 = document.querySelector("q#i.c[a][a]");
+const test23 = document.querySelector("q:p#i:p#i");
+const test24 = document.querySelector("q");
+const test25 = document.querySelector("q.c");
+const test26 = document.querySelector("q.c#i");
+const test27 = document.querySelector("q#i.c");
+const test28 = document.querySelector("math#i.c");
+const test29 = document.querySelector("munderover.c#i");
+
+const test1 = document.querySelector("html body > div ~ a * + portal.basdf.asdfasdf:has(b)");
+const test2 = document.querySelector("b:hover");
+const test3 = document.querySelector("ul[class^=a].b");
+const test4 = document.querySelector("div#no");
+const test5 = document.querySelector("input.basdf.asdfasdf");
+const test6 = document.querySelector("canvas.basdf.asdfasdf");
+const test7 = document.querySelector("body.basdf.asdfasdf");
+const test8 = document.querySelector("x.b:hover");
+const test9 = document.querySelector(":scope > input[type=radio][name=test].aa:nth-of-type(even)");
+
+const test10 = document.querySelector(":scope > .foo [viewBox] foreignObject[xmlns] munderover.sum .fraction [href] .foo[displaystyle]");
+const test11 = document.querySelector(":scope > .foo [viewBox] foreignObject[xmlns] .fraction");
+const test12 = document.querySelector(":scope > .foo [vviewBox] .ffvoreignObject[xmlns] .fraction");
+const test13 = document.querySelector(":scope > .foo");
+const test14 = document.querySelector(".bar");
+const test15 = document.querySelector(".bar .baz");
+const test16 = document.querySelector("filter .noise");
+document.querySelector(":scope > #logo-svg msubsup")
+document.querySelector("math .fraction") // MathMLElement
+document.querySelector("filter > .noise") // SVGElement
+document.querySelector(":scope > #logo-svg foreignObject msubsup .power") // MathMLElement
+
+const test30 = document.querySelector("a.askdjf.lsdjf")
+const test31 = document.querySelector("portal:hover")
+const test32 = document.querySelector("a.b:hover")
+const test33 = document.querySelector("html body > div ~ a * + portal.basdf.asdfasdf:has(b), canvas")
+const test34 = document.querySelector("body a")
+
+let kasdf: BetterTypeScript.SelectorContainsSVGOrMathMLElement<"a math svg munderover.a img[src]">;
+let kasdfsdf: BetterTypeScript.GetElementTypeFromSimpleSelector<".bar">;
+let kasdfsdsdf: BetterTypeScript.SelectorContainsSVGOrMathMLElement<".bar .baz">;
+
+
 // OffscreenCanvas
 
 // const element = document.querySelector("b");

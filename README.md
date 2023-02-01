@@ -75,6 +75,14 @@ element.querySelectorAll(":scope > li:nth-of-type(odd)") // NodeListOf<HTMLLIEle
 document.querySelector("svg#logo > filter:first-of-type feTurbulence:not([type=fractalNoise])") // SVGFETurbulenceElement
 ```
 
+If the element type itself cannot be determined, but the element is a descendant of any SVG or MathML element, the element automacially becomes a `SVGElement` or `MathMLElement`, respectively:
+
+```typescript
+document.querySelector("math .fraction") // MathMLElement
+document.querySelector("filter > .noise") // SVGElement
+document.querySelector(":scope > #logo-svg foreignObject msubsup .power") // MathMLElement
+```
+
 Just to be clear: This parser is _not_ written in TypeScript, it's written solely in _TypeScript type definitions_ (files ending in `.d.ts`). This works similarly to [HypeScript](https://github.com/ronami/HypeScript).
 
 ### `.matches()`
@@ -109,6 +117,19 @@ Working with service workers with type checking enabled is an awful experience b
 
 self.addEventListener("fetch", (event) => {
 	// `event` is of type `FetchEvent`
+})
+```
+
+### Shared workers
+
+The same as for service workers also applies to [shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker). You can now use all shared worker related things out of the box.
+
+```typescript
+/// <reference no-default-lib="true" />
+/// <reference types="better-typescript/worker" />
+
+self.addEventListener("connect", (event) => {
+	// `event` is of type `MessageEvent`
 })
 ```
 

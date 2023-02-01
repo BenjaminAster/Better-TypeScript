@@ -8,4 +8,5 @@
 
 /// <reference path="./types/offscreen-canvas.d.ts" />
 /// <reference path="./types/service-worker.d.ts" />
+/// <reference path="./types/shared-worker.d.ts" />
 /// <reference path="./types/tuple.d.ts" />
