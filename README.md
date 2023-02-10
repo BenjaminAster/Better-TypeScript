@@ -71,16 +71,16 @@ A querySelector parser that parses the CSS selector and automatically returns th
 document.querySelector("a#foo.bar") // HTMLAnchorElement
 document.querySelector("form.info input[type=radio][name=test]:nth-of-type(even)") // HTMLInputElement
 document.querySelector(".math-output mrow ~ munderover[displaystyle=false]") // MathMLElement
-element.querySelectorAll(":scope > li:nth-of-type(odd)") // NodeListOf<HTMLLIElement>
 document.querySelector("svg#logo > filter:first-of-type feTurbulence:not([type=fractalNoise])") // SVGFETurbulenceElement
+element.querySelectorAll(":scope > li:nth-of-type(odd)") // NodeListOf<HTMLLIElement>
 ```
 
-If the element type itself cannot be determined, but the element is a descendant of any SVG or MathML element, the element automacially becomes a `SVGElement` or `MathMLElement`, respectively:
+If the element type itself cannot be determined, but the element is a descendant of any SVG or MathML element, the element automacially becomes an `SVGElement` or `MathMLElement`, respectively:
 
 ```typescript
-document.querySelector("math .fraction") // MathMLElement
-document.querySelector("filter > .noise") // SVGElement
-document.querySelector(":scope > #logo-svg foreignObject msubsup .power") // MathMLElement
+document.querySelector("math.formula .fraction") // MathMLElement
+document.querySelector("filter#displacement-filter > .noise") // SVGElement
+document.querySelector("body > #logo-svg foreignObject[height] msubsup .power") // MathMLElement
 ```
 
 Just to be clear: This parser is _not_ written in TypeScript, it's written solely in _TypeScript type definitions_ (files ending in `.d.ts`). This works similarly to [HypeScript](https://github.com/ronami/HypeScript).
@@ -116,7 +116,7 @@ Working with service workers with type checking enabled is an awful experience b
 /// <reference types="better-typescript/worker" />
 
 self.addEventListener("fetch", (event) => {
-	// `event` is of type `FetchEvent`
+	// `event` has type `FetchEvent`
 })
 ```
 
@@ -129,7 +129,7 @@ The same as for service workers also applies to [shared workers](https://develop
 /// <reference types="better-typescript/worker" />
 
 self.addEventListener("connect", (event) => {
-	// `event` is of type `MessageEvent`
+	// `event` has type `MessageEvent`
 })
 ```
 

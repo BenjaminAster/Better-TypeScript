@@ -5,5 +5,4 @@
 
 /// <reference types="new-javascript/worklet/paint" />
 
-/// <reference path="../types/offscreen-canvas.d.ts" />
 /// <reference path="../types/tuple.d.ts" />

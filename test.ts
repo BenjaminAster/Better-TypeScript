@@ -44,7 +44,44 @@ if (element.matches("img")) {
 
 //////////////
 
+declare const noice: Element;
 
+if (noice.matches("a")) {
+	noice;
+
+	if (noice.matches("[href]")) {
+		noice;
+	} else {
+		noice.href = "";
+	}
+} else {
+	noice;
+}
+
+if (noice.matches("a[disabled]")) {
+	noice;
+} else {
+	noice;
+}
+
+
+declare const test: HTMLAnchorElement;
+
+if (test.matches("div")) {
+	test
+} else {
+	test
+}
+
+
+document.caretRangeFromPoint
+document.caretPositionFromPoint
+
+document.elementFromPoint
+document.elementsFromPoint
+document.scrollingElement
+
+CaretPosition
 
 const test20 = document.querySelector("q.c[a]:p.c[a]");
 const test21 = document.querySelector("q[a]#i#i:p.c");
