@@ -1,9 +1,12 @@
 
-# Better TypeScript
+# Better-TypeScript
+
+> **Note**
+> This requires **TypeScript 5.0**
 
 This repository contains various TypeScript type definitions to make working with TypeScript more convenient.
 
-This project goes along with [TypeScript types for new JavaScript](https://github.com/BenjaminAster/TypeScript-types-for-new-JavaScript), which contains TypeScript type definitions for new JavaScript stuff that isn't in TypeScript's standard type definitions. Better TypeScript depends on [TypeScript types for new JavaScript](https://github.com/BenjaminAster/TypeScript-types-for-new-JavaScript), so it is automatically included if you use Better TypeScript.
+This project goes along with [TypeScript types for new JavaScript](https://github.com/BenjaminAster/TypeScript-types-for-new-JavaScript), which contains TypeScript type definitions for new JavaScript stuff that isn't in TypeScript's standard type definitions. Better-TypeScript depends on [TypeScript types for new JavaScript](https://github.com/BenjaminAster/TypeScript-types-for-new-JavaScript), so it is automatically included if you use Better-TypeScript.
 
 ---
 
@@ -87,7 +90,7 @@ Just to be clear: This parser is _not_ written in TypeScript, it's written solel
 
 ### `.matches()`
 
-You can now use `element.matches(selector)` and Better TypeScript will automatically detect the element and provide you with its type definitions when using it in an if-statement:
+You can now use `element.matches(selector)` and Better-TypeScript will automatically detect the element and provide you with its type definitions when using it in an if-statement:
 
 ```typescript
 const element = document.querySelector(".foo");
@@ -109,7 +112,7 @@ if (element.matches("img")) {
 
 ### Service workers
 
-Working with service workers with type checking enabled is an awful experience by default as in TypeScript, there is no `ServiceWorker` lib, only a `WebWorker` one. Stuff like `self.registration`, `self.clients` or the `fetch` event aren't available by default because from TypeScript's perspecitve, `self` alywas has the type `WorkerGlobalScope` in workers, not `ServiceWorkerGlobalScope`. The way you could previously get around this is by declaring a variable `const _self = self as unknown as ServiceWorkerGlobalScope;` and then working with this `_self` instead of `self` as the global object. This is very ugly and hacky, so Better TypeScript simply provides all service worker related stuff out of the box to any web worker with the `better-typescript/worker` types.
+Working with service workers with type checking enabled is an awful experience by default as in TypeScript, there is no `ServiceWorker` lib, only a `WebWorker` one. Stuff like `self.registration`, `self.clients` or the `fetch` event aren't available by default because from TypeScript's perspecitve, `self` alywas has the type `WorkerGlobalScope` in workers, not `ServiceWorkerGlobalScope`. The way you could previously get around this is by declaring a variable `const _self = self as unknown as ServiceWorkerGlobalScope;` and then working with this `_self` instead of `self` as the global object. This is very ugly and hacky, so Better-TypeScript simply provides all service worker related stuff out of the box to any web worker with the `better-typescript/worker` types.
 
 ```typescript
 /// <reference no-default-lib="true" />
@@ -141,30 +144,30 @@ This adds the `Tuple` type to create fixed length arrays:
 // 💩 previos method:
 const color: [number, number, number, number] = [255, 0, 0, 255];
 
-// 😎 with Better Typescript:
+// 😎 with Better-TypeScript:
 const color: Tuple<number, 4> = [255, 0, 0, 255];
 ```
 
 ### Accept not just strings
 
-Many JavaScript functions also accept numbers which then get automatically converted into a string. TypeScript often _just_ accepts strings, so Better TypeScript adds the ability to call a function with numbers instead of strings.
+Many JavaScript functions also accept numbers which then get automatically converted into a string. TypeScript often _just_ accepts strings, so Better-TypeScript adds the ability to call a function with numbers instead of strings.
 
 ```typescript
 window.addEventListener("pointermove", (event) => {
-	document.documentElement.style.setProperty("--mouse-x", event.clientX); // would be an error without Better TypeScript
+	document.documentElement.style.setProperty("--mouse-x", event.clientX); // would be an error without Better-TypeScript
 	document.documentElement.style.setProperty("--mouse-y", event.clientY);
 });
 ```
 
 ```typescript
 const searchParams = new URLSearchParams(location.search);
-searchParams.set("count", ++count); // would be an error without Better TypeScript
+searchParams.set("count", ++count); // would be an error without Better-TypeScript
 history.replaceState(null, "", "?" + searchParams.toString());
 ```
 
 ### `.cloneNode()`
 
-When calling `.cloneNode()` on any element or fragment, TypeScript just returns the `Node` type by default which is not very useful. With Better TypeScript, `.cloneNode()` returns the type of the element that it is called on.
+When calling `.cloneNode()` on any element or fragment, TypeScript just returns the `Node` type by default which is not very useful. With Better-TypeScript, `.cloneNode()` returns the type of the element that it is called on.
 
 ```typescript
 const anchorTemplate = document.createElement("a");
@@ -183,33 +186,20 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-### MathML
+### Typed OffscreenCanvas options
 
-> **Note**
-> This has been included in TypeScript version 5.0 by default and will be removed once it is out of beta (March 14)
-
-This adds support for [MathML](https://developer.mozilla.org/en-US/docs/Web/MathML) element names as well as the MathML namespace for the `document.createElementNS()` and `document.getElementsByTagNameNS` functions.
-
-```typescript
-document.querySelector("math"); // now returns type `MathMLElement` instead of `Element`
-document.querySelector("mfrac"); // now returns type `MathMLElement` instead of `Element`
-document.createElementNS("http://www.w3.org/1998/Math/MathML", "msub"); // now returns type `MathMLElement` instead of `Element`
-```
-
-### OffscreenCanvas
-
-When getting a specific canvas context (e.g. `"2d"`, `"webgl2"`, ...) from a normal canvas element, TypeScript automatically detects the context type and returns the respective type in the `.getContext()` method.
+When getting a specific canvas context (e.g. `"2d"`, `"webgl2"`, ...) from a normal canvas element, TypeScript automatically detects the context type and gives the the second options parameter the right options type.
 
 ```typescript
 const canvas = document.querySelector("canvas");
-canvas.getContext("2d", { alpha: false }); // returns type `CanvasRenderingContext2D` & the options parameter is of type `CanvasRenderingContext2DSettings`
+canvas.getContext("2d", { alpha: false }); // options parameter has type `CanvasRenderingContext2DSettings`
 ```
 
-However, when using an `OffscreenCanvas`, TypeScript does not provide you with these type definitions and always just returns the `OffscreenCanvasRenderingContext` type which is not very useful. Better TypeScript adds the canvas context types and their option interfaces.
+However, when using an `OffscreenCanvas`, TypeScript does not provide you with these type definitions and gives the options parameter a type of `any` which is not very useful. Better-TypeScript adds the right options interfaces.
 
 ```typescript
 const canvas = new OffscreenCanvas(width, height);
-canvas.getContext("2d", { alpha: false }); // now correctly returns type `CanvasRenderingContext2D` & the options parameter is of type `OffscreenCanvasRenderingContext2DSettings`
+canvas.getContext("2d", { alpha: false }); // the options parameter now has type `OffscreenCanvasRenderingContext2DSettings`
 ```
 
 ### Non-standard stuff
@@ -223,4 +213,59 @@ const isBrave = await navigator.brave?.isBrave?.();
 ```typescript
 if (Element.prototype.scrollIntoViewIfNeeded) element.scrollIntoViewIfNeeded(true);
 else element.scrollIntoView({ block: "center" });
+```
+
+```typescript
+const isChromium = Boolean(window.chrome || Intl.v8BreakIterator);
+```
+
+### `Function` prototype functions
+
+When calling `.apply()`, `.call()` or `.bind()` on a function, the right types are only returned by TypeScript when in strict mode. This adds the return types to be also usable when not in strict mode.
+
+```typescript
+const stringified = Object.prototype.toString.apply(myObject); // `stringified` now has type `string`
+const $ = document.querySelector.bind(document); // `$` now has the same type as document.querySelector
+```
+
+### `TypedArray`
+
+This simply provides the `TypedArray` type as a union type alias of all typed arrays (`Int8Array`, `Uint8Array`, `Uint8ClampedArray`, `Int16Array`, `Uint16Array`, `Int32Array`, `Uint32Array`, `BigInt64Array`, `BigUint64Array`, `Float32Array` and `Float64Array`).
+
+```typescript
+const sendArrayToWASM = (array: TypedArray) => {
+	const buffer = array.buffer;
+	// do some magic...
+	return pointer;
+}
+```
+
+### `Element` extensions
+
+When an element just has a type of `Element` and not `HTMLElement`/`SVGElement`/`MathMLElement`, properties such as `.dataset` or `.style` are not available. Better-TypeScript adds them.
+
+```typescript
+for (const child of document.body.children) {
+	child.dataset.foo = "bar"; // error without Better-TypeScript because `child` has type `Element`
+}
+```
+
+### TreeWalker filters
+
+When using a `SHOW_ELEMENT`, `SHOW_TEXT` or `SHOW_COMMENT` filter when creating a tree walker, the tree walker just walks over elements, text nodes and comments, respectively. Better-TypeScript provides intelligent typings for these.
+
+```typescript
+const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+while (walker.nextNode()) {
+	const currentNode = walker.currentNode; // `currentNode` now has type `Text`
+}
+```
+
+### Callable WebAssembly export functions
+
+A WebAssembly export can either be a function, a `WebAssembly.Global`, a `WebAssembly.Memory` or a `WebAssembly.Table`. Because TypeScript doesn't know which export has which type, you ironically cannot do anything on an export, not even call it as a function. With Better-TypeScript, an export is function, a `WebAssembly.Global`, a `WebAssembly.Memory` *and* a `WebAssembly.Table` all at the same time, which allows you to finally call function exports.
+
+```typescript
+const { module, instance } = await WebAssembly.instantiateStreaming(await window.fetch("./test.wasm"));
+const result = instance.exports.add(34, 35); // error without Better-TypeScript
 ```

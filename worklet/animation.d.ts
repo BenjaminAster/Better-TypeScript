@@ -5,4 +5,4 @@
 
 /// <reference types="new-javascript/worklet/animation" />
 
-/// <reference path="../types/tuple.d.ts" />
+/// <reference path="./worklet-global.d.ts" />

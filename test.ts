@@ -23,6 +23,13 @@
 
 // });
 
+const $ = document.querySelector.bind(document);
+
+const dialog = $("dialog[open]");
+
+const asdfkjdf = Document.prototype.querySelector.call(document, "body.a");
+const asdfkjdf2 = document.querySelector("body.a");
+
 const a: Tuple<number, 3> = [3, 4, 5];
 
 const element1 = document.querySelector("alskdfj a");
@@ -65,6 +72,21 @@ if (noice.matches("a[disabled]")) {
 }
 
 
+const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ATTRIBUTE);
+
+walker.nextNode();
+walker.root;
+
+
+const walker2 = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+while (walker2.nextNode()) {
+	const currentNode = walker2.currentNode // `currentNode` now has type `Text`
+}
+
+document.body.textContent
+
+const asdg = JSON.parse("sldkfjsldaf")
+
 declare const test: HTMLAnchorElement;
 
 if (test.matches("div")) {
@@ -73,6 +95,9 @@ if (test.matches("div")) {
 	test
 }
 
+const { module, instance } = await WebAssembly.instantiateStreaming(await fetch("./test.wasm"));
+
+const sgdjh = instance.exports.abc(3, 6, 7);
 
 document.caretRangeFromPoint
 document.caretPositionFromPoint
@@ -119,13 +144,15 @@ document.querySelector(":scope > #logo-svg foreignObject msubsup .power") // Mat
 const test30 = document.querySelector("a.askdjf.lsdjf")
 const test31 = document.querySelector("portal:hover")
 const test32 = document.querySelector("a.b:hover")
-const test33 = document.querySelector("html body > div ~ a * + portal.basdf.asdfasdf:has(b), canvas")
+const test33 = document.querySelector("html body > div ~ a * + portal.basdf.asdfasdf:has(b)")
 const test34 = document.querySelector("body a")
 
 let kasdf: BetterTypeScript.SelectorContainsSVGOrMathMLElement<"a math svg munderover.a img[src]">;
 let kasdfsdf: BetterTypeScript.GetElementTypeFromSimpleSelector<".bar">;
 let kasdfsdsdf: BetterTypeScript.SelectorContainsSVGOrMathMLElement<".bar .baz">;
 
+
+const string = Object.prototype.toString.apply({})
 
 // OffscreenCanvas
 
@@ -171,3 +198,4 @@ let kasdfsdsdf: BetterTypeScript.SelectorContainsSVGOrMathMLElement<".bar .baz">
 // const ctx = c.getContext("2d", { alpha: true });
 
 
+export { };

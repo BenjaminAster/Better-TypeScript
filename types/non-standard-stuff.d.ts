@@ -26,16 +26,17 @@ declare var chrome: {
 		wasFetchedViaSpdy: boolean,
 		wasNpnNegotiated: boolean,
 	},
-	appPinningPrivate: { // Edge only
-		getPins(): any,
-		pinPage(attestation: string, url?: string, title?: string, callback?: Function): any,
-	},
 };
+
+declare namespace Intl {
+	var v8BreakIterator: any;
+}
 
 // Brave:
 
 interface Brave {
-	isBrave(): Promise<boolean>;}
+	isBrave(): Promise<boolean>;
+}
 
 declare var Brave: {
 	prototype: Brave;

@@ -1,10 +1,5 @@
 
-/// <reference path="./query-selector.d.ts" />
-/// <reference path="./mathml.d.ts" />
-
-declare namespace BetterTypeScript {
-	type SelectorStringContainingElementName = `${`${string} ` | ""}${keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap | keyof MathMLElementTagNameMap}${"" | `${"#" | "." | "[" | ":"}${string}`}`;
-}
+/// <reference path="./selector-parser.d.ts" />
 
 interface Element {
 	matches<K extends BetterTypeScript.SelectorStringContainingElementName>(selectors: K): this is BetterTypeScript.GetElementTypeFromSelector<K>;
