@@ -8,7 +8,7 @@
 		"url": "git+https://github.com/BenjaminAster/Better-TypeScript.git"
 	},
 	"dependencies": {
-		"new-javascript": ">=0.2.4"
+		"new-javascript": ">=0.3.0"
 	},
 	"author": "Benjamin Aster",
 	"license": "WTFPL",
