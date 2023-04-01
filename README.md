@@ -90,7 +90,7 @@ Just to be clear: This parser is _not_ written in TypeScript, it's written solel
 
 ### `.matches()`
 
-You can now use `element.matches(selector)` and Better-TypeScript will automatically detect the element and provide you with its type definitions when using it in an if-statement:
+You can now use `element.matches(selector)` and Better-TypeScript will automatically detect the element and provide you with its type definitions when using it in an if-statement.
 
 ```typescript
 const element = document.querySelector(".foo");
@@ -173,14 +173,14 @@ When calling `.cloneNode()` on any element or fragment, TypeScript just returns 
 const anchorTemplate = document.createElement("a");
 anchorTemplate.href = "https://example.com";
 anchorTemplate.textContent = "example";
-const anchorClone = anchorTemplate.cloneNode(true); // `anchorClone` now has the type `HTMLAnchorElement` instead of just `Node`
+const anchorClone = anchorTemplate.cloneNode(true); // has the type `HTMLAnchorElement` instead of just `Node`
 ```
 
 ```typescript
 const fragment = document.querySelector("template#foo-template").content;
 
 for (let i = 0; i < 10; i++) {
-	const clone = fragment.cloneNode(true); // `clone` now has the type `DocumentFragment` instead of just `Node`
+	const clone = fragment.cloneNode(true); // has the type `DocumentFragment` instead of just `Node`
 	clone.querySelector("a.destination").href = "https://example.com";
 	document.body.append(clone);
 }
@@ -225,7 +225,7 @@ When calling `.apply()`, `.call()` or `.bind()` on a function, the right types a
 
 ```typescript
 const stringified = Object.prototype.toString.apply(myObject); // `stringified` now has type `string`
-const $ = document.querySelector.bind(document); // `$` now has the same type as document.querySelector
+const $ = document.querySelector.bind(document); // has the same type as document.querySelector
 ```
 
 ### `TypedArray`
@@ -257,7 +257,7 @@ When using a `SHOW_ELEMENT`, `SHOW_TEXT` or `SHOW_COMMENT` filter when creating 
 ```typescript
 const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
 while (walker.nextNode()) {
-	const currentNode = walker.currentNode; // `currentNode` now has type `Text`
+	const currentNode = walker.currentNode; // has type `Text`
 }
 ```
 
@@ -268,4 +268,30 @@ A WebAssembly export can either be a function, a `WebAssembly.Global`, a `WebAss
 ```typescript
 const { module, instance } = await WebAssembly.instantiateStreaming(await window.fetch("./test.wasm"));
 const result = instance.exports.add(34, 35); // error without Better-TypeScript
+```
+
+### `DOMParser` returns right document type
+
+Calling `DOMParser.prototype.parseFromString()` returns the generic `Document` interface in pure TypeScript. With Better-TypeScript, it returns `HTMLDocument` for `"text/html"` and `XMLDocument` for `"application/xhtml+xml"`, `"application/xml"`, `"image/svg+xml"` and `"text/xml"`.
+
+```typescript
+const doc = new DOMParser().parseFromString(svg, "image/svg+xml"); // has type `XMLDocument`
+```
+
+### Bubbling `ShadowRoot` events
+
+Events of DOM elements inside a `ShadowRoot` bubble and can be listened for by a `ShadowRoot`. Better-TypeScript adds support for these events.
+
+```typescript
+customElements.define("my-element", class extends HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: "open" });
+		this.shadowRoot.append(template.content.cloneNode(true));
+
+		this.shadowRoot.addEventListener("pointerdown", (event) => {
+			console.log(event.pointerType); // `event` has type `PointerEvent`
+		});
+	}
+});
 ```

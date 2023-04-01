@@ -95,6 +95,20 @@ if (test.matches("div")) {
 	test
 }
 
+const template = document.querySelector("template#my-element-template");
+
+customElements.define("my-element", class extends HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: "open" });
+		this.shadowRoot.append(template.content.cloneNode(true));
+
+		this.shadowRoot.addEventListener("pointerdown", (event) => {
+			console.log(event.pointerType); // `event` has type `PointerEvent`
+		});
+	}
+});
+
 const { module, instance } = await WebAssembly.instantiateStreaming(await fetch("./test.wasm"));
 
 const sgdjh = instance.exports.abc(3, 6, 7);
@@ -107,6 +121,12 @@ document.elementsFromPoint
 document.scrollingElement
 
 CaretPosition
+
+new DOMParser().parseFromString("asdf", "application/xhtml+xml");
+new DOMParser().parseFromString("asdf", "application/xml");
+new DOMParser().parseFromString("asdf", "image/svg+xml");
+new DOMParser().parseFromString("asdf", "text/html");
+new DOMParser().parseFromString("asdf", "text/xml");
 
 const test20 = document.querySelector("q.c[a]:p.c[a]");
 const test21 = document.querySelector("q[a]#i#i:p.c");
