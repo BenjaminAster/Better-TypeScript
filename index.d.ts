@@ -9,6 +9,7 @@
 /// <reference path="./types/clone-node.d.ts" />
 /// <reference path="./types/dom-parser.d.ts" />
 /// <reference path="./types/element.d.ts" />
+/// <reference path="./types/event-target.d.ts" />
 /// <reference path="./types/function.d.ts" />
 /// <reference path="./types/matches.d.ts" />
 /// <reference path="./types/non-standard-stuff.d.ts" />
@@ -20,3 +21,10 @@
 /// <reference path="./types/tuple.d.ts" />
 /// <reference path="./types/typed-array.d.ts" />
 /// <reference path="./types/webassembly.d.ts" />
+
+
+
+interface Array<T> {
+	reduce<U>(callbackfn: (previousValue: U, currentValue: any, currentIndex?: number, array?: T[]) => U, initialValue: U): U;
+}
+

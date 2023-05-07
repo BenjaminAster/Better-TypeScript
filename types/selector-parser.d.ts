@@ -6,56 +6,76 @@ declare namespace BetterTypeScript {
 		Input extends `${string} ${infer AfterFirstSpace}` ? BetterTypeScript.GetStringAfterLastSpace<AfterFirstSpace> : Input
 	);
 
-	type SelectorContainsSVGOrMathMLElement<Input extends string, CurrentElementNamespaceType extends Element = HTMLElement> = (
+	enum ElementNamespace {
+		HTML = "html",
+		SVG = "svg",
+		MATHML = "mathml",
+	}
+
+	type NamespaceElements = {
+		[BetterTypeScript.ElementNamespace.HTML]: HTMLElement;
+		[BetterTypeScript.ElementNamespace.SVG]: SVGElement;
+		[BetterTypeScript.ElementNamespace.MATHML]: MathMLElement;
+	}
+
+	type SelectorContainsSVGOrMathMLElement<Input extends string, CurrentElementNamespace extends ElementNamespace = BetterTypeScript.ElementNamespace.HTML> = (
 		Input extends `${infer CurrentSelectorFragment} ${infer AfterFirstSpace}` ? (
-			BetterTypeScript.GetElementTypeFromSimpleSelector<CurrentSelectorFragment> extends infer ElementType ? (
-				ElementType extends SVGElement
-				? SelectorContainsSVGOrMathMLElement<AfterFirstSpace, SVGElement>
-				: ElementType extends MathMLElement
-				? SelectorContainsSVGOrMathMLElement<AfterFirstSpace, MathMLElement>
-				: SelectorContainsSVGOrMathMLElement<AfterFirstSpace, CurrentElementNamespaceType>
+			BetterTypeScript.GetElementNamespaceFromSimpleSelector<CurrentSelectorFragment> extends infer ElementNamespace ? (
+				ElementNamespace extends (BetterTypeScript.ElementNamespace.SVG | BetterTypeScript.ElementNamespace.MATHML)
+				? SelectorContainsSVGOrMathMLElement<AfterFirstSpace, ElementNamespace>
+				: SelectorContainsSVGOrMathMLElement<AfterFirstSpace, CurrentElementNamespace>
 			) : never
-		) : CurrentElementNamespaceType
+		) : BetterTypeScript.NamespaceElements[CurrentElementNamespace]
 	);
 
-	type GetElementTypeFromSimpleSelector<Input extends string> = (
+	type GetElementNamespaceFromSimpleSelector<Input extends string> = (
+		BetterTypeScript.GetElementTagNameFromSimpleSelector<Input> extends infer ElementTagName ? (
+			ElementTagName extends keyof HTMLElementTagNameMap
+			? BetterTypeScript.ElementNamespace.HTML
+			: ElementTagName extends keyof SVGElementTagNameMap
+			? BetterTypeScript.ElementNamespace.SVG
+			: ElementTagName extends keyof MathMLElementTagNameMap
+			? BetterTypeScript.ElementNamespace.MATHML
+			: BetterTypeScript.ElementNamespace.HTML
+		) : never
+	);
+
+	type GetElementTagNameFromSimpleSelector<Input extends string> = (
 		(
 			Input extends `${infer BeforeFirstHash}#${string}`
 			? BeforeFirstHash
 			: Input
 		) extends infer Selector ? (
-			(
-				Selector extends `${infer BeforeFirstPeriod}.${string}`
-				? BeforeFirstPeriod
-				: Selector
-			) extends infer Selector ? (
-				(
-					Selector extends `${infer BeforeFirstBracket}[${string}`
-					? BeforeFirstBracket
-					: Selector
-				) extends infer Selector ? (
-					(
-						Selector extends `${infer BeforeFirstColon}:${string}`
-						? BeforeFirstColon
-						: Selector
-					) extends infer ElementName ? (
-						ElementName extends keyof HTMLElementTagNameMap
-						? HTMLElementTagNameMap[ElementName]
-						: ElementName extends keyof SVGElementTagNameMap
-						? SVGElementTagNameMap[ElementName]
-						: ElementName extends keyof MathMLElementTagNameMap
-						? MathMLElementTagNameMap[ElementName]
-						: Element
-					) : never
-				) : never
-			) : never
+			Selector extends `${infer BeforeFirstPeriod}.${string}`
+			? BeforeFirstPeriod
+			: Selector
+		) extends infer Selector ? (
+			Selector extends `${infer BeforeFirstBracket}[${string}`
+			? BeforeFirstBracket
+			: Selector
+		) extends infer Selector ? (
+			Selector extends `${infer BeforeFirstColon}:${string}`
+			? BeforeFirstColon
+			: Selector
+		) : never : never : never
+	);
+
+	type GetElementTypeFromSimpleSelector<Input extends string> = (
+		BetterTypeScript.GetElementTagNameFromSimpleSelector<Input> extends infer ElementTagName ? (
+			ElementTagName extends keyof HTMLElementTagNameMap
+			? HTMLElementTagNameMap[ElementTagName]
+			: ElementTagName extends keyof SVGElementTagNameMap
+			? SVGElementTagNameMap[ElementTagName]
+			: ElementTagName extends keyof MathMLElementTagNameMap
+			? MathMLElementTagNameMap[ElementTagName]
+			: null
 		) : never
 	);
 
 	type GetElementTypeFromSelector<Input extends string> = (
 		BetterTypeScript.GetStringAfterLastSpace<Input> extends infer SimpleSelector extends string ? (
 			BetterTypeScript.GetElementTypeFromSimpleSelector<SimpleSelector> extends infer ElementType ? (
-				Element extends ElementType ? SelectorContainsSVGOrMathMLElement<Input> : ElementType
+				ElementType extends null ? SelectorContainsSVGOrMathMLElement<Input> : ElementType
 			) : never
 		) : never
 	);

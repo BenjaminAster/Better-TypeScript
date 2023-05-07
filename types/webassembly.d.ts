@@ -10,24 +10,12 @@ declare namespace BetterTypeScript {
 			module: globalThis.WebAssembly.Module;
 		}
 
-		interface ExportValue {
-			// Function:
-			(...args: number[]): number;
-
-			// WebAssembly.Global:
-			value: any;
-			valueOf(): any;
-
-			// WebAssembly.Memory:
-			readonly buffer: ArrayBuffer;
-			grow(delta: number): number;
-
-			// WebAssembly.Table:
-			readonly length: number;
-			get(index: number): any;
-			grow(delta: number, value?: any): number;
-			set(index: number, value?: any): void;
-		}
+		type ExportValue = (
+			& ((...args: any[]) => any)
+			& globalThis.WebAssembly.Global
+			& globalThis.WebAssembly.Memory
+			& globalThis.WebAssembly.Table
+		);
 
 		type Exports = Record<string, BetterTypeScript.WebAssembly.ExportValue>;
 	}

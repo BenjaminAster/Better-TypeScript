@@ -35,7 +35,7 @@ const a: Tuple<number, 3> = [3, 4, 5];
 const element1 = document.querySelector("alskdfj a");
 element1.querySelectorAll(":scope > li:nth-of-type(odd)")
 
-
+window.SpeechRecognitionResult
 
 const element = document.querySelector(".foo");
 
@@ -112,6 +112,9 @@ customElements.define("my-element", class extends HTMLElement {
 const { module, instance } = await WebAssembly.instantiateStreaming(await fetch("./test.wasm"));
 
 const sgdjh = instance.exports.abc(3, 6, 7);
+const sgdjht = instance.exports.myGlobal.value;
+const sgdjsdfht = instance.exports.myMemory.buffer;
+const sgasdfdjht = instance.exports.myTable.set;
 
 document.caretRangeFromPoint
 document.caretPositionFromPoint
@@ -166,10 +169,27 @@ const test31 = document.querySelector("portal:hover")
 const test32 = document.querySelector("a.b:hover")
 const test33 = document.querySelector("html body > div ~ a * + portal.basdf.asdfasdf:has(b)")
 const test34 = document.querySelector("body a")
+const test35 = document.querySelector("a .test")
+const test36 = document.querySelector("input[type=range] ~ .text")
+const test37 = document.querySelector("input[type=range] .text")
+const test38 = document.querySelector("input .text")
+const test39 = document.querySelector("b .test")
+
+document.querySelector(".parameter-chooser > label > input[type=radio][name=parameter] ~ .text");
 
 let kasdf: BetterTypeScript.SelectorContainsSVGOrMathMLElement<"a math svg munderover.a img[src]">;
 let kasdfsdf: BetterTypeScript.GetElementTypeFromSimpleSelector<".bar">;
 let kasdfsdsdf: BetterTypeScript.SelectorContainsSVGOrMathMLElement<".bar .baz">;
+
+let alskdfl: BetterTypeScript.SelectorStringContainingElementName = "alsdjfl.a a.b laksdfj";
+
+type asdf = BetterTypeScript.SelectorContainsSVGOrMathMLElement<"span .test", BetterTypeScript.ElementNamespace.SVG>
+type asd3f = BetterTypeScript.SelectorContainsSVGOrMathMLElement<"span .test">
+type asdfdfds = BetterTypeScript.GetElementTypeFromSimpleSelector<"span">
+type asdfdfdssdf = HTMLSpanElement extends MathMLElement ? 1 : 0;
+type asdfdfdssdfsd = HTMLInputElement extends MathMLElement ? 1 : 0;
+type asdfdfdssdf4 = MathMLElement extends HTMLSpanElement ? 1 : 0;
+type asdfdfdssdf4sdf = MathMLElement["constructor"]["name"];
 
 
 const string = Object.prototype.toString.apply({})
