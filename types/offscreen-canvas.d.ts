@@ -23,8 +23,12 @@ interface OffscreenWebGLContextAttributes {
 }
 
 interface OffscreenCanvas extends EventTarget {
-	getContext(contextId: "2d", options?: OffscreenCanvasRenderingContext2DSettings): OffscreenCanvasRenderingContext2D | null;
-	getContext(contextId: "bitmaprenderer", options?: OffscreenImageBitmapRenderingContextSettings): ImageBitmapRenderingContext | null;
-	getContext(contextId: "webgl", options?: OffscreenWebGLContextAttributes): WebGLRenderingContext | null;
-	getContext(contextId: "webgl2", options?: OffscreenWebGLContextAttributes): WebGL2RenderingContext | null;
+	/** Set the third parameter (`_set_to_undefined`) to `undefined` so that TypeScript recognizes that you are using the Better-TypeScript version of it */
+	getContext(contextId: "2d", options?: OffscreenCanvasRenderingContext2DSettings, _set_to_undefined?: undefined): OffscreenCanvasRenderingContext2D | null;
+	/** Set the third parameter (`_set_to_undefined`) to `undefined` so that TypeScript recognizes that you are using the Better-TypeScript version of it */
+	getContext(contextId: "bitmaprenderer", options?: OffscreenImageBitmapRenderingContextSettings, _set_to_undefined?: undefined): ImageBitmapRenderingContext | null;
+	/** Set the third parameter (`_set_to_undefined`) to `undefined` so that TypeScript recognizes that you are using the Better-TypeScript version of it */
+	getContext(contextId: "webgl", options?: OffscreenWebGLContextAttributes, _set_to_undefined?: undefined): WebGLRenderingContext | null;
+	/** Set the third parameter (`_set_to_undefined`) to `undefined` so that TypeScript recognizes that you are using the Better-TypeScript version of it */
+	getContext(contextId: "webgl2", options?: OffscreenWebGLContextAttributes, _set_to_undefined?: undefined): WebGL2RenderingContext | null;
 }

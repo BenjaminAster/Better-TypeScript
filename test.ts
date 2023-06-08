@@ -18,6 +18,12 @@
 
 // onfetch
 
+const input = document.createElement("input");
+input.type = "text";
+input.addEventListener("input", ({ target }) => {
+	target.value;
+})
+
 
 // self.addEventListener("fetch", (event) => {
 
@@ -109,7 +115,53 @@ customElements.define("my-element", class extends HTMLElement {
 	}
 });
 
+
+type HypertextNode = string | [string, { [key: string]: any }, ...HypertextNode[]];
+
+const hypertextNode: HypertextNode =
+	["div", { id: "parent" },
+		["div", { id: "first-child" }, "I'm the first child"],
+		["div", { id: "second-child" }, "I'm the second child"]
+	];
+
+
 const { module, instance } = await WebAssembly.instantiateStreaming(await fetch("./test.wasm"));
+
+document.documentElement.addEventListener("drop", (event) => {
+	const items = event.dataTransfer.items;
+	const [item] = items;
+})
+
+var custom = {};
+
+var formatter = {
+	header: function (x) {
+		if (x === custom) {
+			return ["span", { "style": "background-color: #fcc" }, "Hello!"] as const;
+		} else {
+			return null;
+		}
+	},
+	hasBody: function (x) {
+		return x === custom;
+	},
+	body: function (x) {
+		var selfRef = ["object", { "object": custom }] as const;
+		return ["ol", {}, ["li", {}, "world!"], ["li", {}, selfRef]] as const;
+	}
+};
+
+window.devtoolsFormatters = [formatter];
+
+
+let recursion = {};
+window.devtoolsFormatters = [{
+	header: (object) => object === recursion ? ["span", { style: "border: 1px solid #888" }, "Hello!"] : null,
+	hasBody: Boolean,
+	body: (object) => ["ol", {}, ["li", {}, "world!"], ["li", {}, ["object", { object }]]],
+}];
+console.log(recursion);
+
 
 const sgdjh = instance.exports.abc(3, 6, 7);
 const sgdjht = instance.exports.myGlobal.value;
