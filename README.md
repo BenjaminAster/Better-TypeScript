@@ -66,7 +66,7 @@ For [worklets](https://developer.mozilla.org/en-US/docs/Web/API/Worklet), use `b
 
 ## Stuff in this repository
 
-### `.querySelector()` element parser ([view source](./types/query-selctor.d.ts))
+### `.querySelector()` element parser ([view source](./types/query-selector.d.ts))
 
 A querySelector parser that parses the CSS selector and automatically returns the interface for the respective element:
 
@@ -123,7 +123,7 @@ self.addEventListener("fetch", (event) => {
 })
 ```
 
-### Shared workers ([view source](./types/shared-selctor.d.ts))
+### Shared workers ([view source](./types/shared-worker.d.ts))
 
 The same as for service workers also applies to [shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker). You can now use all shared worker related things out of the box.
 
@@ -301,7 +301,7 @@ customElements.define("my-element", class extends HTMLElement {
 When calling [`navigator.performance.getEntriesByType`](https://developer.mozilla.org/en-US/docs/Web/API/Performance/getEntriesByType), Better-TypeScript automatically returns an array of the corresponding performance entry type instead of just the generic `PerformanceEntry`.
 
 ```typescript
-const entryType = performance.getEntriesByType("navigation")[0]?.entryType; // error without Bettery-TypeScript
+const siteLoadingType = performance.getEntriesByType("navigation")[0]?.type; // error without Bettery-TypeScript
 ```
 
 ### Chromium DevTools Custom Object Formatters ([view source](./types/devtools-formatters.d.ts))
@@ -319,7 +319,7 @@ window.devtoolsFormatters = [{
 console.log(recursion);
 ```
 
-### Event target for `HTMLFieldSetElement`
+### Event target for `HTMLFieldSetElement` ([view source](./types/event-target.d.ts))
 
 [`Event.prototype.target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target) is always just [`EventTarget`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) by default, which is not very helpful. Better-TypeScript adds support for [`Event.prototype.target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target) and [`Event.prototype.currentTarget`](https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget) for [`HTMLInputElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement), [`HTMLSelectElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement), [`HTMLSelectMenuElement`](https://open-ui.org/components/selectmenu/) and [`HTMLTextAreaElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement) (always the element itself) as well as [`HTMLFieldSetElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFieldSetElement) (a union type of `HTMLInputElement`, `HTMLSelectElement`, `HTMLSelectMenuElement` and `HTMLTextAreaElement`). This allows you to group multiple form elements (such as [`<input type="radio" />`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio)) in one [`<fieldset>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset) and listen to a change with only a single event listener.
 
