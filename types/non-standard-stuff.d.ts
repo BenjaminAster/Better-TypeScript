@@ -264,3 +264,8 @@ declare var ondevicelight: ((this: Window, ev: DeviceLightEvent) => any) | null;
 interface GlobalEventHandlersEventMap {
 	"devicelight": DeviceLightEvent;
 }
+
+// Servo:
+
+declare var webdriverTimeout: any;
+declare var webdriverCallback: any;

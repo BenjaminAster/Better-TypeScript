@@ -347,3 +347,14 @@ document.querySelector("fieldset#favorite-animal").addEventListener("change", ({
 	favoriteAnimal = target.value;
 });
 ```
+
+### `InputEvent` interface for `"input"` event types ([view source](./types/input-event.d.ts))
+
+When the browser fires an [`"input"`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event, the event _usually_ is an [`InputEvent`](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent). But because there are situations where it just has the generic [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) type (e.g. with an `<input type="range" />`), TypeScript _always_ gives `"input"` events the `Event` interface as its type, which makes working with it very impractical. Better-TypeScript reverts this and makes `"input"` events always have the `InputEvent` type so that you can use its properties (specifically [`data`](https://developer.mozilla.org/docs/Web/API/InputEvent/data), [`dataTransfer`](https://developer.mozilla.org/docs/Web/API/InputEvent/dataTransfer), [`inputType`](https://developer.mozilla.org/docs/Web/API/InputEvent/inputType), [`isComposing`](https://developer.mozilla.org/docs/Web/API/InputEvent/isComposing) and [`getTargetRanges()`](https://developer.mozilla.org/docs/Web/API/InputEvent/getTargetRanges)).
+
+```typescript
+element.addEventListener("input", (event) => {
+	// `event` now has type `InputEvent`
+	console.log(event.inputType);
+});
+```

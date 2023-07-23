@@ -18,6 +18,13 @@
 
 // onfetch
 
+document.body.addEventListener("input", function (event) {
+	event.inputType
+	this
+})
+
+document.addEventListener("input", event=>{})
+
 const input = document.createElement("input");
 input.type = "text";
 input.addEventListener("input", ({ target }) => {

@@ -12,6 +12,7 @@
 /// <reference path="./types/element.d.ts" />
 /// <reference path="./types/event-target.d.ts" />
 /// <reference path="./types/function.d.ts" />
+/// <reference path="./types/input-event.d.ts" />
 /// <reference path="./types/matches.d.ts" />
 /// <reference path="./types/non-standard-stuff.d.ts" />
 /// <reference path="./types/offscreen-canvas.d.ts" />
