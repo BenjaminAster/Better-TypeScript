@@ -2,7 +2,7 @@
 # Better-TypeScript
 
 > **Note**
-> This requires **TypeScript 5.0**
+> This requires **TypeScript 5.1**
 
 This repository contains various TypeScript type definitions to make working with TypeScript more convenient.
 
@@ -19,7 +19,7 @@ GitHub: [BenjaminAster/Better-TypeScript](https://github.com/BenjaminAster/Bette
 Install using npm:
 
 ```shell
-npm i -D better-typescript@latest
+npm i --save better-typescript@latest
 ```
 
 Reference the type definitions directly in your TypeScript/JavaScript files...
@@ -358,3 +358,7 @@ element.addEventListener("input", (event) => {
 	console.log(event.inputType);
 });
 ```
+
+### `execCommand` command id enum ([view source](./types/execcommand.d.ts))
+
+Better-TypeScript adds enum values for the `commandId` parameter of [`document.execCommand()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand) so that your editor can autocomplete the string. Keep in mind that the behavior of `execCommand()` is very inconsistent between browsers and there is only an [unofficial draft specification](https://w3c.github.io/editing/docs/execCommand/). MDN even goes as far as marking the function as "deprecated".

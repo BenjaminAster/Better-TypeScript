@@ -18,6 +18,11 @@
 
 // onfetch
 
+document.execCommand("bold");
+
+let s = document.getSelection();
+s.extend
+
 document.body.addEventListener("input", function (event) {
 	event.inputType
 	this

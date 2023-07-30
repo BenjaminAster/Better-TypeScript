@@ -11,6 +11,7 @@
 /// <reference path="./types/dom-parser.d.ts" />
 /// <reference path="./types/element.d.ts" />
 /// <reference path="./types/event-target.d.ts" />
+/// <reference path="./types/execcommand.d.ts" />
 /// <reference path="./types/function.d.ts" />
 /// <reference path="./types/input-event.d.ts" />
 /// <reference path="./types/matches.d.ts" />
