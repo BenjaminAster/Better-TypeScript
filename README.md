@@ -1,9 +1,6 @@
 
 # Better-TypeScript
 
-> **Note**
-> This requires **TypeScript 5.1**
-
 This repository contains various TypeScript type definitions to make working with TypeScript more convenient.
 
 This project goes along with [TypeScript types for new JavaScript](https://github.com/BenjaminAster/TypeScript-types-for-new-JavaScript), which contains TypeScript type definitions for new JavaScript stuff that isn't in TypeScript's standard type definitions. Better-TypeScript depends on [TypeScript types for new JavaScript](https://github.com/BenjaminAster/TypeScript-types-for-new-JavaScript), so it is automatically included if you use Better-TypeScript.
