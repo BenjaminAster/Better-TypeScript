@@ -7,8 +7,8 @@ declare namespace BetterTypeScript {
 }
 
 interface HTMLFieldSetElement {
-	addEventListener(type: "change", listener: (this: HTMLFieldSetElement, ev: BetterTypeScript.EventWithTargets<HTMLInputElement & HTMLSelectElement & HTMLSelectMenuElement & HTMLTextAreaElement, HTMLFieldSetElement>) => any, options?: boolean | AddEventListenerOptions): void;
-	addEventListener(type: "input", listener: (this: HTMLFieldSetElement, ev: BetterTypeScript.EventWithTargets<HTMLInputElement & HTMLSelectElement & HTMLSelectMenuElement & HTMLTextAreaElement, HTMLFieldSetElement>) => any, options?: boolean | AddEventListenerOptions): void;
+	addEventListener(type: "change", listener: (this: HTMLFieldSetElement, ev: BetterTypeScript.EventWithTargets<HTMLInputElement & HTMLSelectElement & HTMLSelectListElement & HTMLTextAreaElement, HTMLFieldSetElement>) => any, options?: boolean | AddEventListenerOptions): void;
+	addEventListener(type: "input", listener: (this: HTMLFieldSetElement, ev: BetterTypeScript.EventWithTargets<HTMLInputElement & HTMLSelectElement & HTMLSelectListElement & HTMLTextAreaElement, HTMLFieldSetElement>) => any, options?: boolean | AddEventListenerOptions): void;
 }
 
 interface HTMLInputElement {
@@ -21,9 +21,9 @@ interface HTMLSelectElement {
 	addEventListener(type: "input", listener: (this: HTMLSelectElement, ev: BetterTypeScript.EventWithTargets<HTMLSelectElement, HTMLSelectElement>) => any, options?: boolean | AddEventListenerOptions): void;
 }
 
-interface HTMLSelectMenuElement {
-	addEventListener(type: "change", listener: (this: HTMLSelectMenuElement, ev: BetterTypeScript.EventWithTargets<HTMLSelectMenuElement, HTMLSelectMenuElement>) => any, options?: boolean | AddEventListenerOptions): void;
-	addEventListener(type: "input", listener: (this: HTMLSelectMenuElement, ev: BetterTypeScript.EventWithTargets<HTMLSelectMenuElement, HTMLSelectMenuElement>) => any, options?: boolean | AddEventListenerOptions): void;
+interface HTMLSelectListElement {
+	addEventListener(type: "change", listener: (this: HTMLSelectListElement, ev: BetterTypeScript.EventWithTargets<HTMLSelectListElement, HTMLSelectListElement>) => any, options?: boolean | AddEventListenerOptions): void;
+	addEventListener(type: "input", listener: (this: HTMLSelectListElement, ev: BetterTypeScript.EventWithTargets<HTMLSelectListElement, HTMLSelectListElement>) => any, options?: boolean | AddEventListenerOptions): void;
 }
 
 interface HTMLTextAreaElement {

@@ -4,14 +4,14 @@ interface HTMLElement {
 	removeEventListener(type: "input", listener: (this: HTMLElement, ev: InputEvent) => any, options?: boolean | EventListenerOptions): void;
 }
 
-interface MathMLElement {
-	addEventListener(type: "input", listener: (this: MathMLElement, ev: InputEvent) => any, options?: boolean | AddEventListenerOptions): void;
-	removeEventListener(type: "input", listener: (this: MathMLElement, ev: InputEvent) => any, options?: boolean | EventListenerOptions): void;
+interface HTMLTextAreaElement {
+	addEventListener(type: "input", listener: (this: HTMLTextAreaElement, ev: InputEvent) => any, options?: boolean | AddEventListenerOptions): void;
+	removeEventListener(type: "input", listener: (this: HTMLTextAreaElement, ev: InputEvent) => any, options?: boolean | EventListenerOptions): void;
 }
 
-interface SVGElement {
-	addEventListener(type: "input", listener: (this: SVGElement, ev: InputEvent) => any, options?: boolean | AddEventListenerOptions): void;
-	removeEventListener(type: "input", listener: (this: SVGElement, ev: InputEvent) => any, options?: boolean | EventListenerOptions): void;
+interface HTMLInputElement {
+	addEventListener(type: "input", listener: (this: HTMLInputElement, ev: InputEvent) => any, options?: boolean | AddEventListenerOptions): void;
+	removeEventListener(type: "input", listener: (this: HTMLInputElement, ev: InputEvent) => any, options?: boolean | EventListenerOptions): void;
 }
 
 interface Document {

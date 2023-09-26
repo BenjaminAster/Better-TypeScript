@@ -188,6 +188,8 @@ declare var g_opr: {
 	scrap(): void;
 };
 
+declare var isOpera: boolean;
+
 // Ulaa:
 
 declare var ulaa: {
@@ -223,16 +225,33 @@ declare var QuickAccess: {
 // DuckDuckGo:
 
 declare var AutoconsentAndroid: any;
-
 declare var BlobConverter: any;
-
 declare var BrowserAutofill: any;
-
 declare var EmailInterface: any;
-
 declare var LoginDetection: any;
-
 declare var Print: any;
+
+// Microsoft Edge:
+
+// window.external.getHostEnvironmentValue()
+// https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/mt795399(v=vs.85)
+
+type MicrosoftHostEnvironmentValueName = (
+	| "os-architecture"
+	| "os-build"
+	| "os-mode"
+	| "os-sku"
+);
+
+interface External {
+	getHostEnvironmentValue(name: MicrosoftHostEnvironmentValueName): string | null;
+}
+
+// Vivaldi:
+
+interface DataTransfer {
+	SetURLAndTitle(url: string, title: string): void;
+}
 
 // Firefox:
 
@@ -240,7 +259,6 @@ interface CSSMozDocumentRule { }
 
 declare var CSSMozDocumentRule: {
 	prototype: CSSMozDocumentRule;
-	new(): never;
 };
 
 declare function dump(message: string): void;
@@ -251,7 +269,7 @@ interface DeviceLightEventInit extends EventInit {
 
 declare var DeviceLightEvent: {
 	prototype: DeviceLightEvent;
-	new(name: string, eventInitDict?: DeviceLightEventInit)
+	new(name: string, eventInitDict?: DeviceLightEventInit): DeviceLightEvent;
 }
 
 interface DeviceLightEvent extends Event {
@@ -263,6 +281,10 @@ declare var ondevicelight: ((this: Window, ev: DeviceLightEvent) => any) | null;
 
 interface GlobalEventHandlersEventMap {
 	"devicelight": DeviceLightEvent;
+}
+
+interface DataTransfer {
+	addElement(element: Element): void;
 }
 
 // Servo:
