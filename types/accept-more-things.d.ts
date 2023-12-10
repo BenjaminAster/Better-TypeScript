@@ -11,3 +11,8 @@ interface URLSearchParams {
 interface Element {
 	setAttribute(qualifiedName: string, value: string | number | boolean): void;
 }
+
+interface History {
+	pushState(data: any): void;
+	replaceState(data: any): void;
+}

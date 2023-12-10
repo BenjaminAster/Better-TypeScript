@@ -5,7 +5,7 @@
 
 /// <reference types="new-javascript" />
 
-/// <reference path="./types/accept-not-just-strings.d.ts" />
+/// <reference path="./types/accept-more-things.d.ts" />
 /// <reference path="./types/clone-node.d.ts" />
 /// <reference path="./types/devtools-formatters.d.ts" />
 /// <reference path="./types/dom-parser.d.ts" />

@@ -1,10 +1,10 @@
 
-// See also: https://docs.google.com/document/d/1FTascZXT9cxfetuPRT2eXPQKXui4nWFivUnS_335T3U/preview
+// See https://docs.google.com/document/d/1FTascZXT9cxfetuPRT2eXPQKXui4nWFivUnS_335T3U/preview
 
 declare namespace BetterTypeScript {
-	type ChromiumDevtoolsFormatterObjectConfig = Record<string | symbol, any>;
+	type DevtoolsFormatterObjectConfig = Record<string | symbol, any>;
 
-	type ChromiumDevtoolsFormatterElementTagName = (
+	type DevtoolsFormatterElementTagName = (
 		| "div"
 		| "span"
 		| "ol"
@@ -14,43 +14,43 @@ declare namespace BetterTypeScript {
 		| "td"
 	);
 
-	type ChromiumDevtoolsFormatterElementTemplate = (
-		| ChromiumDevtoolsFormatterStyledElementTemplate
-		| ChromiumDevtoolsFormatterUnstyledElementTemplate
+	type DevtoolsFormatterElementTemplate = (
+		| DevtoolsFormatterStyledElementTemplate
+		| DevtoolsFormatterUnstyledElementTemplate
 	);
 
-	type ChromiumDevtoolsFormatterStyledElementTemplate = readonly [
-		BetterTypeScript.ChromiumDevtoolsFormatterElementTagName,
+	type DevtoolsFormatterStyledElementTemplate = readonly [
+		BetterTypeScript.DevtoolsFormatterElementTagName,
 		{
 			style?: string,
 		},
-		...BetterTypeScript.ChromiumDevtoolsFormatterItem[],
+		...BetterTypeScript.DevtoolsFormatterItem[],
 	];
 
-	type ChromiumDevtoolsFormatterUnstyledElementTemplate = readonly [
-		BetterTypeScript.ChromiumDevtoolsFormatterElementTagName,
-		...BetterTypeScript.ChromiumDevtoolsFormatterItem[],
+	type DevtoolsFormatterUnstyledElementTemplate = readonly [
+		BetterTypeScript.DevtoolsFormatterElementTagName,
+		...BetterTypeScript.DevtoolsFormatterItem[],
 	];
 
-	type ChromiumDevtoolsFormatterObjectReference = readonly [
+	type DevtoolsFormatterObjectReference = readonly [
 		"object",
 		{
 			object: any,
-			config?: BetterTypeScript.ChromiumDevtoolsFormatterObjectConfig,
+			config?: BetterTypeScript.DevtoolsFormatterObjectConfig,
 		},
 	];
 
-	type ChromiumDevtoolsFormatterItem = (
+	type DevtoolsFormatterItem = (
 		| string
-		| BetterTypeScript.ChromiumDevtoolsFormatterElementTemplate
-		| BetterTypeScript.ChromiumDevtoolsFormatterObjectReference
+		| BetterTypeScript.DevtoolsFormatterElementTemplate
+		| BetterTypeScript.DevtoolsFormatterObjectReference
 	);
 
-	interface ChromiumDevtoolsFormatter {
-		header(object?: any, config?: BetterTypeScript.ChromiumDevtoolsFormatterObjectConfig): BetterTypeScript.ChromiumDevtoolsFormatterItem | null;
-		hasBody(object?: any, config?: BetterTypeScript.ChromiumDevtoolsFormatterObjectConfig): boolean;
-		body(object?: any, config?: BetterTypeScript.ChromiumDevtoolsFormatterObjectConfig): BetterTypeScript.ChromiumDevtoolsFormatterItem;
+	interface DevtoolsFormatter {
+		header(object?: any, config?: BetterTypeScript.DevtoolsFormatterObjectConfig): BetterTypeScript.DevtoolsFormatterItem | null;
+		hasBody(object?: any, config?: BetterTypeScript.DevtoolsFormatterObjectConfig): boolean;
+		body(object?: any, config?: BetterTypeScript.DevtoolsFormatterObjectConfig): BetterTypeScript.DevtoolsFormatterItem;
 	}
 }
 
-declare var devtoolsFormatters: BetterTypeScript.ChromiumDevtoolsFormatter[];
+declare var devtoolsFormatters: BetterTypeScript.DevtoolsFormatter[];

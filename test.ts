@@ -18,6 +18,8 @@
 
 // onfetch
 
+history.pushState({})
+
 document.execCommand("bold");
 
 let s = document.getSelection();

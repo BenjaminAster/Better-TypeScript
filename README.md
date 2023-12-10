@@ -145,7 +145,7 @@ const color: [number, number, number, number] = [255, 0, 0, 255];
 const color: Tuple<number, 4> = [255, 0, 0, 255];
 ```
 
-### Accept not just strings ([view source](./types/accept-not-just-strings.d.ts))
+### Accept more things ([view source](./types/accept-more-things.d.ts))
 
 Many JavaScript functions also accept numbers which then get automatically converted into a string. TypeScript often _just_ accepts strings, so Better-TypeScript adds the ability to call a function with numbers instead of strings.
 
@@ -160,6 +160,13 @@ window.addEventListener("pointermove", (event) => {
 const searchParams = new URLSearchParams(location.search);
 searchParams.set("count", ++count); // would be an error without Better-TypeScript
 history.replaceState(null, "", "?" + searchParams.toString());
+```
+
+Also, for some reason, TypeScript doesn't allow calling [`history.pushState()`](https://developer.mozilla.org/en-US/docs/Web/API/History/pushState) and [`history.replaceState()`](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState) without the unused second parameter. Better-TypeScript adds support for that:
+
+```typescript
+history.replaceState({ someState: 4 });
+history.pushState({ someOtherState: 42 });
 ```
 
 ### `.cloneNode()` ([view source](./types/clone-node.d.ts))
