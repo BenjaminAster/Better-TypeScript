@@ -20,6 +20,23 @@
 
 history.pushState({})
 
+self.addEventListener("fetch", (event) => {
+
+})
+
+self.onconnect
+
+self.addEventListener("connect", e=>{
+
+})
+
+const asdfa = () => 5;
+asdfa.apply
+
+const c = document.querySelector.apply(document, "canvas")
+
+self.name
+
 document.execCommand("bold");
 
 let s = document.getSelection();
@@ -30,7 +47,7 @@ document.body.addEventListener("input", function (event) {
 	this
 })
 
-document.addEventListener("input", event=>{})
+document.addEventListener("input", event => { })
 
 const input = document.createElement("input");
 input.type = "text";

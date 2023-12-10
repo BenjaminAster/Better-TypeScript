@@ -35,14 +35,6 @@ Reference the type definitions directly in your TypeScript/JavaScript files...
 }
 ```
 
-For [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) (including [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)), use `better-typescript/worker` as the path. If you use a `tsconfig.json` or `jsconfig.json` configuration file, you have to exclude the worker files there with the `"exclude"` option so that the DOM lib doesn't get included by default. If your worker is a JavaScript and not TypeScript file, you then have to manually re-enable type checking for the file via `// @ts-check`. Also don't forget to exclude the DOM lib with `no-default-lib="true"`. The start of your worker file should look like this:
-
-```javascript
-// @ts-check
-/// <reference no-default-lib="true" />
-/// <reference types="better-typescript/worker" />
-```
-
 For [worklets](https://developer.mozilla.org/en-US/docs/Web/API/Worklet), use `better-typescript/worklet/<WORKLET_NAME>` as the path:
  - `better-typescript/worklet/audio` for [audio worklets](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet)
  - `better-typescript/worklet/paint` for [paint worklets](https://developer.mozilla.org/en-US/docs/Web/API/PaintWorklet)
@@ -109,12 +101,9 @@ if (element.matches("img")) {
 
 ### Service workers ([view source](./types/service-worker.d.ts))
 
-Working with service workers with type checking enabled is an awful experience by default as in TypeScript, there is no `ServiceWorker` lib, only a `WebWorker` one. Stuff like `self.registration`, `self.clients` or the `fetch` event aren't available by default because from TypeScript's perspecitve, `self` alywas has the type `WorkerGlobalScope` in workers, not `ServiceWorkerGlobalScope`. The way you could previously get around this is by declaring a variable `const _self = self as unknown as ServiceWorkerGlobalScope;` and then working with this `_self` instead of `self` as the global object. This is very ugly and hacky, so Better-TypeScript simply provides all service worker related stuff out of the box to any web worker with the `better-typescript/worker` types.
+Working with service workers with type checking enabled is an awful experience by default as in TypeScript, there is no `ServiceWorker` lib, only a `WebWorker` one. Stuff like `self.registration`, `self.clients` or the `fetch` event aren't available by default because from TypeScript's perspecitve, `self` alywas has the type `WorkerGlobalScope` in workers, not `ServiceWorkerGlobalScope`. The way you could previously get around this is by declaring a variable `const _self = self as unknown as ServiceWorkerGlobalScope;` and then working with this `_self` instead of `self` as the global object. This is very ugly and hacky, so Better-TypeScript simply provides all service worker related stuff out of the box to all files.
 
 ```typescript
-/// <reference no-default-lib="true" />
-/// <reference types="better-typescript/worker" />
-
 self.addEventListener("fetch", (event) => {
 	// `event` has type `FetchEvent`
 })
@@ -125,9 +114,6 @@ self.addEventListener("fetch", (event) => {
 The same as for service workers also applies to [shared workers](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker). You can now use all shared worker related things out of the box.
 
 ```typescript
-/// <reference no-default-lib="true" />
-/// <reference types="better-typescript/worker" />
-
 self.addEventListener("connect", (event) => {
 	// `event` has type `MessageEvent`
 })
@@ -221,15 +207,6 @@ else element.scrollIntoView({ block: "center" });
 
 ```typescript
 const isChromium = Boolean(window.chrome || Intl.v8BreakIterator);
-```
-
-### `Function` prototype functions ([view source](./types/function.d.ts))
-
-When calling `.apply()`, `.call()` or `.bind()` on a function, the right types are only returned by TypeScript when in strict mode. This adds the return types to be also usable when not in strict mode.
-
-```typescript
-const stringified = Object.prototype.toString.apply(myObject); // `stringified` now has type `string`
-const $ = document.querySelector.bind(document); // has the same type as document.querySelector
 ```
 
 ### `TypedArray`
