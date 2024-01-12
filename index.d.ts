@@ -7,11 +7,13 @@
 
 /// <reference path="./types/accept-more-things.d.ts" />
 /// <reference path="./types/clone-node.d.ts" />
+/// <reference path="./types/custom-element.d.ts" />
 /// <reference path="./types/devtools-formatters.d.ts" />
 /// <reference path="./types/dom-parser.d.ts" />
 /// <reference path="./types/element.d.ts" />
 /// <reference path="./types/event-target.d.ts" />
 /// <reference path="./types/execcommand.d.ts" />
+/// <reference path="./types/get-own-property-descriptors.d.ts" />
 /// <reference path="./types/input-event.d.ts" />
 /// <reference path="./types/matches.d.ts" />
 /// <reference path="./types/non-standard-stuff.d.ts" />

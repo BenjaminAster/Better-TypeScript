@@ -20,13 +20,35 @@
 
 history.pushState({})
 
+const ownKeys = (object: any) => {
+	const descriptors = Object.getOwnPropertyDescriptors(object);
+	for (const key of Reflect.ownKeys(descriptors)) {
+		console.log(key, descriptors[key])
+	}
+}
+
 self.addEventListener("fetch", (event) => {
 
-})
+});
+
+customElements.define("a-b", class extends HTMLElement {
+	constructor() {
+		super()
+	};
+	static formAssociated = true
+	asdkfasdf = "a"
+	static disabledFeatures = ["internals"]
+	connectedCallback() {
+		return 5
+	};
+	adoptedCallback() {
+
+	}
+});
 
 self.onconnect
 
-self.addEventListener("connect", e=>{
+self.addEventListener("connect", e => {
 
 })
 

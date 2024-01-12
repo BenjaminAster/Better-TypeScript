@@ -168,6 +168,10 @@ declare var ApplePayShippingMethodSelectedEvent: any;
 declare var ApplePayShippingMethodUpdate: any;
 declare var ApplePayValidateMerchantEvent: any;
 
+interface Navigator {
+	readonly standalone: boolean;
+}
+
 // Brave:
 
 interface Brave {
@@ -199,30 +203,30 @@ declare var ulaa: {
 // Samsung Internet:
 
 declare var News: {
-	isHomepageNewsFeed(...params: any[]): any;
-	setHomepageAsNewsFeed(...params: any[]): any;
+	isHomepageNewsFeed(...args: any[]): any;
+	setHomepageAsNewsFeed(...args: any[]): any;
 };
 
 declare var QuickAccess: {
-	deleteItems(...params: any[]): any;
-	enterEditMode(...params: any[]): any;
-	enterPrivacyBoard(...params: any[]): any;
-	getItems(...params: any[]): any;
-	getPrivacyDashboardData(...params: any[]): any;
-	isNightModeEnabled(...params: any[]): any;
-	isPrivacyBoardEnabled(...params: any[]): any;
-	isRefererCleanerEnabled(...params: any[]): any;
-	isSecretMode(...params: any[]): any;
-	isSetAsHomePage(...params: any[]): any;
-	requestPrivacyDashbordData(...params: any[]): any;
-	sendSILog(...params: any[]): any;
-	showAddDialog(...params: any[]): any;
-	showQuickAccessSettings(...params: any[]): any;
-	showRenameDialog(...params: any[]): any;
-	turnOnPrivacyFeature(...params: any[]): any;
+	deleteItems(...args: any[]): any;
+	enterEditMode(...args: any[]): any;
+	enterPrivacyBoard(...args: any[]): any;
+	getItems(...args: any[]): any;
+	getPrivacyDashboardData(...args: any[]): any;
+	isNightModeEnabled(...args: any[]): any;
+	isPrivacyBoardEnabled(...args: any[]): any;
+	isRefererCleanerEnabled(...args: any[]): any;
+	isSecretMode(...args: any[]): any;
+	isSetAsHomePage(...args: any[]): any;
+	requestPrivacyDashbordData(...args: any[]): any;
+	sendSILog(...args: any[]): any;
+	showAddDialog(...args: any[]): any;
+	showQuickAccessSettings(...args: any[]): any;
+	showRenameDialog(...args: any[]): any;
+	turnOnPrivacyFeature(...args: any[]): any;
 };
 
-// DuckDuckGo:
+// DuckDuckGo Android:
 
 declare var AutoconsentAndroid: any;
 declare var BlobConverter: any;
@@ -231,10 +235,29 @@ declare var EmailInterface: any;
 declare var LoginDetection: any;
 declare var Print: any;
 
+// DuckDuckGo Desktop:
+
+declare function gc(): void;
+
+interface Navigator {
+	readonly duckduckgo: {
+		isDuckDuckGo(): Promise<boolean>;
+		readonly platform: string;
+		readonly taintedOrigins: Set<any>;
+		readonly taints: Set<any>;
+	};
+}
+
 // Microsoft Edge:
 
-// window.external.getHostEnvironmentValue()
-// https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/mt795399(v=vs.85)
+interface SpeechSynthesis {
+	preload(arg1: any, arg2: any[]): void;
+}
+
+interface HTMLVideoElement {
+	readonly msVideoProcessing: string;
+	msGetVideoProcessingTypes(): string[];
+}
 
 type MicrosoftHostEnvironmentValueName = (
 	| "os-architecture"
@@ -242,8 +265,9 @@ type MicrosoftHostEnvironmentValueName = (
 	| "os-mode"
 	| "os-sku"
 );
-
+	
 interface External {
+	// https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/mt795399(v=vs.85)
 	getHostEnvironmentValue(name: MicrosoftHostEnvironmentValueName): string | null;
 }
 
@@ -254,6 +278,11 @@ interface DataTransfer {
 }
 
 // Firefox:
+
+interface Navigator {
+	taintEnabled(): boolean;
+	readonly oscpu: string;
+}
 
 interface CSSMozDocumentRule { }
 
@@ -273,7 +302,7 @@ declare var DeviceLightEvent: {
 }
 
 interface DeviceLightEvent extends Event {
-	value: number;
+	readonly value: number;
 }
 
 /** @deprecated */

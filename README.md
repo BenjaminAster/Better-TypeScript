@@ -285,9 +285,9 @@ When calling [`navigator.performance.getEntriesByType`](https://developer.mozill
 const siteLoadingType = performance.getEntriesByType("navigation")[0]?.type; // error without Bettery-TypeScript
 ```
 
-### Chromium DevTools Custom Object Formatters ([view source](./types/devtools-formatters.d.ts))
+### DevTools Custom Object Formatters ([view source](./types/devtools-formatters.d.ts))
 
-Chromium DevTools support a feature called [Custom Object Formatters](https://docs.google.com/document/d/1FTascZXT9cxfetuPRT2eXPQKXui4nWFivUnS_335T3U/preview) that let you customize the appearance and interactivity of objects printed in the JavaScript console. To enable this feature, you have to go to `Settings` >> `Preferences` >> `Console` >> `Enable custom formatters`. Better-TypeScript adds type definitions for this feature.
+Chromium & Firefox DevTools support a feature called [Custom Object Formatters](https://docs.google.com/document/d/1FTascZXT9cxfetuPRT2eXPQKXui4nWFivUnS_335T3U/preview) that let you customize the appearance and interactivity of objects printed in the JavaScript console (To enable this feature, click `Enable custom formatters` in the DevTools settings of Chromium or Firefox). Better-TypeScript adds type definitions for this feature.
 
 ```typescript
 const recursion = {};
@@ -343,3 +343,39 @@ element.addEventListener("input", (event) => {
 ### `execCommand` command id enum ([view source](./types/execcommand.d.ts))
 
 Better-TypeScript adds enum values for the `commandId` parameter of [`document.execCommand()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand) so that your editor can autocomplete the string. Keep in mind that the behavior of `execCommand()` is very inconsistent between browsers and there is only an [unofficial draft specification](https://w3c.github.io/editing/docs/execCommand/). MDN even goes as far as marking the function as "deprecated".
+
+### Custom element classes ([view source](./types/custom-element.d.ts))
+
+Better-TypeScript adds type checking for the static attributes and lifecycle callback functions of custom element classes.
+
+```typescript
+customElements.define("my-element", class extends HTMLElement {
+	constructor() {
+		super();
+	};
+	connectedCallback() { };
+	disconnectedCallback() { };
+	adoptedCallback(oldDocument: Document, newDocument: Document) { };
+	attributeChangedCallback(name: string, oldValue: string, newValue: string, namespace: string) { };
+	formAssociatedCallback(form: HTMLFormElement) { };
+	formDisabledCallback(disabled: boolean) { };
+	formResetCallback() { };
+	formStateRestoreCallback(newState: any, mode: string) { };
+	static observedAttributes: string[] = [];
+	static disabledFeatures: string[] = [];
+	static formAssociated: boolean = true;
+});
+```
+
+### Symbol keys in `Object.getOwnPropertyDescriptors()` ([view source](./types/get-own-property-descriptors.d.ts))
+
+For some reason, TypeScript's standard library thinks that [`Object.getOwnPropertyDescriptors()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors) returns just strings as its object keys. Better-TypeScript adds support for symbol keys.
+
+```typescript
+const logOwnKeys = (object: any) => {
+	const descriptors = Object.getOwnPropertyDescriptors(object);
+	for (const key of Reflect.ownKeys(descriptors)) {
+		console.log(key, descriptors[key]); // error without Better-TypeScript
+	}
+};
+```
