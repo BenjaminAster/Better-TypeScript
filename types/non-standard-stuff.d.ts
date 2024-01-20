@@ -271,6 +271,10 @@ interface External {
 	getHostEnvironmentValue(name: MicrosoftHostEnvironmentValueName): string | null;
 }
 
+declare var videoAdsBlockerNativeHandler: {
+	logBlockSuccess: any
+};
+
 // Vivaldi:
 
 interface DataTransfer {
@@ -315,6 +319,25 @@ interface GlobalEventHandlersEventMap {
 interface DataTransfer {
 	addElement(element: Element): void;
 }
+
+declare var CSS2Properties: any;
+
+interface DataTransfer {
+	addElement(): any;
+	mozCursor(): any;
+	mozSourceNode(): any;
+	mozUserCancelled(): any;
+}
+
+interface Directory {
+	getfiles(): any;
+	getfilesAndDirectories(): any;
+	path: any;
+}
+
+declare var Directory: {
+	prototype: Directory;
+};
 
 // Servo:
 

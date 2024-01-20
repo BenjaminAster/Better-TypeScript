@@ -367,7 +367,13 @@ customElements.define("my-element", class extends HTMLElement {
 });
 ```
 
-### Symbol keys in `Object.getOwnPropertyDescriptors()` ([view source](./types/get-own-property-descriptors.d.ts))
+### Callback functions ([view source](./types/callback-functions.d.ts))
+
+[TODO]: add description
+
+### ECMAScript stuff ([view source](./types/ecmascript.d.ts))
+
+#### Symbol keys in `Object.getOwnPropertyDescriptors()`
 
 For some reason, TypeScript's standard library thinks that [`Object.getOwnPropertyDescriptors()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors) returns just strings as its object keys. Better-TypeScript adds support for symbol keys.
 
@@ -379,3 +385,5 @@ const logOwnKeys = (object: any) => {
 	}
 };
 ```
+
+[TODO]: add description for Array::includes & Function::{call, apply, bind}

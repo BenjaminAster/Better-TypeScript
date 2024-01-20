@@ -146,6 +146,9 @@ document.body.textContent
 
 const asdg = JSON.parse("sldkfjsldaf")
 
+const parseFromString = DOMParser.prototype.parseFromString.bind(new DOMParser());
+const parseHTML = Range.prototype.createContextualFragment.bind(new Range());
+
 declare const test: HTMLAnchorElement;
 
 if (test.matches("div")) {
@@ -214,6 +217,8 @@ window.devtoolsFormatters = [{
 	body: (object) => ["ol", {}, ["li", {}, "world!"], ["li", {}, ["object", { object }]]],
 }];
 console.log(recursion);
+
+
 
 
 const sgdjh = instance.exports.abc(3, 6, 7);
