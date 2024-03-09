@@ -387,3 +387,7 @@ const logOwnKeys = (object: any) => {
 ```
 
 [TODO]: add description for Array::includes & Function::{call, apply, bind}
+
+### `.getTargetRanges()`
+
+[TODO]: add description
