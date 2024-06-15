@@ -265,7 +265,7 @@ type MicrosoftHostEnvironmentValueName = (
 	| "os-mode"
 	| "os-sku"
 );
-	
+
 interface External {
 	// https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/platform-apis/mt795399(v=vs.85)
 	getHostEnvironmentValue(name: MicrosoftHostEnvironmentValueName): string | null;
@@ -279,6 +279,32 @@ declare var videoAdsBlockerNativeHandler: {
 
 interface DataTransfer {
 	SetURLAndTitle(url: string, title: string): void;
+}
+
+// Google Go:
+
+declare var __gg__: {
+	karaokeNavigateToParagraph(...args: any[]): any;
+	loadElementCss(...args: any[]): any;
+	loadElementJs(...args: any[]): any;
+	translateNotifyApiReady(...args: any[]): any;
+	translateNotifyDetectionError(...args: any[]): any;
+	translateNotifyError(...args: any[]): any;
+	translateNotifyFinished(...args: any[]): any;
+	translateRemoteApiProxyCancel(...args: any[]): any;
+	translateRemoteApiProxyIsSupported(...args: any[]): any;
+	translateRemoteApiProxySend(...args: any[]): any;
+	translateSetSourceLanguage(...args: any[]): any;
+}
+
+declare var gmaSdk: {
+	getClickSignals(...args: any[]): any;
+	getClickSignalsWithTimeout(...args: any[]): any;
+	getQueryInfo(...args: any[]): any;
+	getViewSignals(...args: any[]): any;
+	getViewSignalsWithTimeout(...args: any[]): any;
+	recordClick(...args: any[]): any;
+	reportTouchEvent(...args: any[]): any;
 }
 
 // Firefox:
